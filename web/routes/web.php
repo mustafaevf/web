@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +30,6 @@ Route::get('/register', function () {
 Route::get('/recovery', function () {
     return view('auth/recovery');
 });
+
+Route::post('login', [LoginController::class, 'store']);
+Route::post('register', [RegisterController::class, 'store']);

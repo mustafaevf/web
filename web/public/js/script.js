@@ -1,5 +1,10 @@
+function href(link) {
+  window.location.href = link;
+}
+
+
 function login() {
-    const username = $('#auth-login').val();
+    const username = $('#auth-username').val();
     const password = $('#auth-password').val();
   
     $.ajaxSetup({
