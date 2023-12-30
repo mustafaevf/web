@@ -5,7 +5,7 @@
     
     <div class="input">
         <img src="{{asset('images/user.png')}}" alt="">
-        <input type="text" autocomplete="off" id="auth-username">
+        <input type="text" autocomplete="off"  id="auth-username">
     </div>
     
     <div class="input">
