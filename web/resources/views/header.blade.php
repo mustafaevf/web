@@ -13,30 +13,42 @@
     <div class="wrapper">
         <div class="left__container">
             <div class="left__container-header">
-                <div class="block">
-                    <div class="block__inner">
-                        <div class="block-left">
-                            @if (Auth::user())
-                                @php
-                                    $user = Auth::user();
-                                @endphp
-                                <div class="block-avatar">
-                                    <img src="{{asset('/images/'.$user->avatar)}}" alt="">
-                                </div>
-                                <div class="block-info">
-                                    <span class="title">{{$user->login}}</span>
-                                    <span class="info">{{$user->balance}} руб.</span>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="block-right">
-                            <a href="/logout" class="btn-error">Выйти</a>
+                @if (Auth::user())
+                    @php
+                        $user = Auth::user();
+                    @endphp
+                    <div class="block">
+                        <div class="block__inner">
+                            <div class="block-left">
+                                
+                                    <div class="block-avatar">
+                                        <img src="{{asset('/images/'.$user->avatar)}}" alt="">
+                                    </div>
+                                    <div class="block-info">
+                                        <span class="title">{{$user->login}}</span>
+                                        <span class="info">{{$user->balance}} руб.</span>
+                                    </div>
+                                
+                            </div>
+                            <div class="block-right">
+                                <a href="/logout" class="btn-error">Выйти</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="items__flex">
+                        <a href="/pay" class="btn-primary">Пополнить</a>
+                        <a href="/withdraw" class="btn-primary">Вывод</a>
+                    </div>
+                @else
+                    
+                
+                @endif
             </div>
             <hr>
             <div class="left__container-menu">
+                <li>
+                    <a href="/">Главная</a>
+                </li>
                 <li>
                     <a href="">Продать</a>
                 </li>

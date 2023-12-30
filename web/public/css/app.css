@@ -25,7 +25,7 @@ input {
     width: 100%;
     color: #333;
     font-size: 15px;
-    padding: 1rem .9rem;
+    padding: .6rem .3rem;
 }
 .box_ {
     background: #F7F7F9;
@@ -88,10 +88,20 @@ span.info {
     color: #333;
 }
 .btn-error {
-    padding: .4rem .7rem;
-    border-radius: 7px;
+    padding: .5rem .7rem;
+    border-radius: 4px;
     background: #f0f0f0;
     font-size: 15px;
+}
+.btn-primary {
+    color: #333;
+    padding: .7rem 1rem;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 15px;
+}
+.btn-primary:hover {
+    color: #333;
 }
 button {
     background: #7CA6F8;
@@ -108,6 +118,14 @@ button {
     background: #f0f0f0;
     border-radius: 9px;
     display: flex;
+}
+.input_flex {
+    display: flex;
+    gap:.9rem;
+}
+.input_flex button {
+    width: 120px;
+    padding: .3rem .7rem;
 }
 .input img {
     width: 15px;
@@ -148,4 +166,58 @@ li {
     justify-content: center;
     align-items: center;
     gap: 1rem;
+}
+.items__flex {
+    display: flex;
+    gap: .7rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.main-title {
+    margin-top: 1rem;
+    font-size: 20px;
+    font-weight: 600;
+}
+.label {
+    margin-bottom: .5rem;
+    font-size: 15px;
+}
+p span {
+    font-weight: bold;
+}
+.methods-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.method-block {
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 1rem;
+    border: 1px solid #F7F7F9;
+    box-shadow: 1px 2px #F7F7F9;
+}
+.method-block.active {
+    border: 1px solid #7ca5f875;
+}
+.circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    background: #f0f0f0;
+    box-shadow: 1px 2px #fff;
+}
+.method-block-inner {
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+}
+.method-block-inner img {
+    width: 24px;
+    height: 24px;
+}
+.inner-flex {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
