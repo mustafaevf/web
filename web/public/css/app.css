@@ -137,12 +137,21 @@ button {
 }
 li {
     list-style: none;
-    padding: .3rem .1rem;
+    /* padding: .3rem .1rem; */
 }
 .left__container-menu {
     display: flex;
     flex-direction: column;
+    gap: .7rem;
 
+}
+.menu_link {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+}
+.left__container-menu li {
+    padding: .3rem 1rem;
 }
 .form {
     display: flex;

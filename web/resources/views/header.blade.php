@@ -46,12 +46,8 @@
             </div>
             <hr>
             <div class="left__container-menu">
-                <li>
-                    <a href="/">Главная</a>
-                </li>
-                <li>
-                    <a href="">Продать</a>
-                </li>
+                <a href="" class="menu_link">Главная</a>
+                <a href=""></a>    
             </div>
         </div>
         <div class="right__container">
