@@ -37,7 +37,7 @@ class RegisterController extends Controller
                 'updated_at' => Carbon::now()
             ];
             User::insert($data);
-            return redirect()->route('login');
+            return response('ok');
         } 
         else 
         {

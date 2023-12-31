@@ -1,3 +1,5 @@
+const { redirect } = require("express/lib/response");
+
 function href(link) {
   window.location.href = link;
 }
@@ -55,6 +57,9 @@ function register() {
       type: 'POST',
       data: data,
       success: function(response) {
+        if(response == 'ok') {
+          href('/login');
+        }
         console.log(response)
         
       },
