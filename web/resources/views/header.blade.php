@@ -40,14 +40,20 @@
                         <a href="/withdraw" class="btn-primary">Вывод</a>
                     </div>
                 @else
-                    
+                    <div class="block">
+                        <div class="block__inner">
+                            <a href="/login" class="btn-info">Авторизация</a>    
+
+                        </div>
+
+                    </div>
                 
                 @endif
             </div>
             <hr>
             <div class="left__container-menu">
-                <a href="" class="menu_link">Главная</a>
-                <a href=""></a>    
+                <a href="/" class="menu_link"><img src="{{asset("images/home.svg")}}" alt="">Главная</a>
+                <a href="/sell" class="menu_link"><img src="{{asset("images/sell.svg")}}" alt="">Продать</a>    
             </div>
         </div>
         <div class="right__container">
