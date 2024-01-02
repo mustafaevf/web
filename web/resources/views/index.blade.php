@@ -11,11 +11,17 @@
     Выберите категорию
 </div>
 <div class="main-platforms">
-    <a href="/platform/">
-        <div class="platform-block">
-            <img src="{{asset('images/telegram.svg')}}" alt="">
+    @php
+        $platforms = App\Models\Platform::where('status', 1)->get();
+    @endphp
 
-        </div>
-    </a>
+    @foreach($platforms as $platform)
+        <a href="/platforms/{{strtolower($platform->title)}}">
+            <div class="platform-block">
+                <img src="{{ asset('images/' . $platform->img) }}" alt="">
+            </div>
+        </a>
+
+    @endforeach
 </div>
 @stop

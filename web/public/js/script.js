@@ -1,4 +1,4 @@
-const { redirect } = require("express/lib/response");
+// const { redirect } = require("express/lib/response");
 
 function href(link) {
   window.location.href = link;
@@ -69,3 +69,24 @@ function register() {
       }
     });
 }
+$('#choose-category').click(function() {
+  if($(".select_opened").hasClass("hide")) {
+    $(".select_opened").removeClass("hide");
+    $(this).find("img").attr("src", "http://127.0.0.1:8000/images/expand_up.svg")
+  } else {
+    $(".select_opened").addClass("hide");
+    $(this).find("img").attr("src", "http://127.0.0.1:8000/images/expand_down.svg")
+  }
+});
+
+$("li").click(function() {
+  var findedClass = $(this).parent().parent().attr("class");
+  if(findedClass == "select_opened") {
+    var text = $(this).text();
+    var elementsWithSelectClass = $('.select');
+    elementsWithSelectClass.find("span").html(text);
+    $("." + findedClass).addClass("hide");
+    $(".select").find("img").attr("src", "http://127.0.0.1:8000/images/expand_down.svg")
+  }
+  alert(myClass);
+});

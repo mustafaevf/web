@@ -27,6 +27,18 @@ input {
     font-size: 15px;
     padding: .6rem .3rem;
 }
+textarea {
+    outline: none;
+    border: none;
+    background: transparent;
+    width: 100%;
+    color: #333;
+    font-size: 15px;
+    padding: .6rem .3rem;
+    height: 200px;
+    width: 100%;
+    resize: none;
+}
 .box_ {
     background: #F7F7F9;
 }
@@ -135,6 +147,40 @@ button {
     border-radius: 9px;
     display: flex;
 }
+.select {
+    width: 100%;
+    align-items: center ;
+    background: #f0f0f0;
+    border-radius: 9px;
+    display: flex;
+    font-size: 15px;
+    cursor: pointer;
+    padding: .6rem 1rem;
+    justify-content: space-between;
+}
+.select_opened {
+    position: absolute;
+    background: #fff;
+    z-index: 999;
+    width: 500px;
+    border: 1px solid #F7F7F9;
+    box-shadow: 1px 2px #F7F7F9;
+    border-radius: 4px;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
+}
+.select_opened li {
+    padding: .3rem .4rem;
+    cursor: pointer;
+    transition: .3s;
+}
+.select_opened.hide {
+    display: none;
+}
+.select_opened li:hover {
+    background: #7ca5f828;
+    transition: .3s;
+}
 .input_flex {
     display: flex;
     gap:.9rem;
@@ -190,6 +236,10 @@ li {
     font-size: 15px;
     padding: .6rem 1rem;
 }
+.form textarea {
+    font-size: 15px;
+    padding: .6rem 1rem;
+}
 .title {
     font-size: 32px;
     color: #000;
@@ -213,6 +263,11 @@ li {
     margin-top: 1rem;
     font-size: 20px;
     font-weight: 600;
+}
+.title img {
+    width: 30px;
+    height: 30px;
+    margin-left: .6rem;
 }
 .label {
     margin-bottom: .5rem;
