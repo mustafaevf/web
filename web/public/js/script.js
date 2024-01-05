@@ -90,3 +90,41 @@ $("li").click(function() {
   }
   alert(myClass);
 });
+
+function sell_confirm(platform_id) {
+  title = $("#sell-title").val();
+  description = $("#sell-description").val();
+  price = $("#sell-price").val();
+  category = $(".select").find("span").text();
+  info = $("#sell-info").val();
+  
+  if(category == "Выберите") {
+    alert("Выберите категорию товара")
+    return;
+  }
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'title': title,
+    'description': description,
+    'price': price,
+    'category': category,
+    'info': info,
+    'platform_id': platform_id
+  } 
+  $.ajax({
+    url: '/addProduct', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      console.log(response)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+}

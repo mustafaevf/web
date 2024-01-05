@@ -48,7 +48,7 @@
                 <input type="text" autocomplete="off" placeholder="" id="sell-price">
             </div>
         </div>
-        <button>Добавить</button>
+        <button onclick=sell_confirm({{$platform->id}})>Добавить</button>
     </div>
 
 @stop

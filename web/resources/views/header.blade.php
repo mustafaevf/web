@@ -60,6 +60,19 @@
             @yield('main')
         </div>
     </div>
+    <div class="modal-wrapper" style="display: none;">
+        <div class="modal-container">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>Авторизация</h3>
+                    <img src="{{asset('images/close.svg')}}" alt="">
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="{{asset('js/script.js')}}"></script>
 </body>
 </html>
