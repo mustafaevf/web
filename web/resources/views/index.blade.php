@@ -31,26 +31,29 @@
         $products = App\Models\Product::where('status', 1)->get();
     @endphp
     @foreach($products as $product)
-    <div class="product-block">
-        <div class="product-block-header">
-            <div class="product-block-title">
-                {{$product->title}}
+    <a href="/product/{{$product->id}}">
+        <div class="product-block">
+            <div class="product-block-header">
+                <div class="product-block-title">
+                    {{$product->title}}
+                </div>
+                <div class="product-block-price">       
+                    {{$product->price}}
+                </div>
             </div>
-            <div class="product-block-price">
-                {{$product->price}}
+            <div class="product-block-body">
+                @php
+                    $platform = App\Models\Platform::where('id', $product->platform_id)->first();
+                    // $user = App\Models\User::where('id', $product->user_id)
+                @endphp
+                <div class="platform-title">
+                    <img src="{{asset('images/'.$platform->img)}}" alt="">
+                    <span>{{$platform->title}}</span>
+                </div>
             </div>
         </div>
-        <div class="product-block-body">
-            @php
-                $platform = App\Models\Platform::where('id', $product->platform_id)->first();
-                // $user = App\Models\User::where('id', $product->user_id)
-            @endphp
-            <div class="platform-title">
-                <img src="{{asset('images/'.$platform->img)}}" alt="">
-                <span>{{$platform->title}}</span>
-            </div>
-        </div>
-    </div>
+    </a>
+    
     @endforeach
 </div>
 @stop

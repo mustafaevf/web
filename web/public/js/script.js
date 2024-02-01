@@ -1,9 +1,27 @@
 // const { redirect } = require("express/lib/response");
 
+// const { param } = require("express/lib/request");
+
 function href(link) {
   window.location.href = link;
 }
 
+$('img').click(function () {
+  if($(this).parent().attr('class') == 'modal-header') {
+    $(this).parent().parent().parent().parent().css('display', 'none')
+  }
+})
+
+$('.select-main').click(function() {
+  el = $(this).find('.select_opened')
+  if(el.hasClass("hide")) {
+    el.removeClass("hide");
+    $(this).find(".select").find("img").attr("src", "http://127.0.0.1:8000/images/expand_up.svg")
+  } else {
+    el.addClass("hide");
+    $(this).find(".select").find("img").attr("src", "http://127.0.0.1:8000/images/expand_down.svg")
+  }
+})
 
 function login() {
     const username = $('#auth-username').val();
@@ -79,16 +97,76 @@ $('#choose-category').click(function() {
   }
 });
 
+function editCategory(id) {
+  category_name = $(".modal-body").find(".form").find("input").val()
+  category_id = id
+  if(category_id == '' || category_name == '') {
+    alert("Заполините все поля")
+    return
+  }
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'name': category_name,
+    'id': category_id
+  } 
+  $.ajax({
+    url: '/admin/editCategory', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      alert(response)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+}
+
+
+
+function openModal(type, id) {
+  if(type == "editCategory") {
+    $(".modal-wrapper").last().css('display', 'flex');
+    $(".modal-header").last().find('h3').html("Редактирование")
+    $(".modal-body").last().html("<div class='form'><div class='input'><input type='text' placeholder='Название'></div><button onclick='editCategory(" + id +")'>Сохранить</button></div>")
+  }
+  // if(type == "addCategory") {
+  //   $(".modal-wrapper").css('display', 'flex');
+  //   $(".modal-header").find('h3').html("Добавление")
+  //   $(".modal-body").html("<div class='form'><div class='input'><input type='text'></div><button onclick='editCategory(" + id +")'>Сохранить</button></div>")
+  // }
+  if(type == "addCategory") {
+    $('#modal_add').css('display', 'flex');
+  }
+  if(type == "sell") {
+    $("#modal_sell").css('display', 'flex');
+    // $(".modal-header").find('h3').html("Выберите платформу")
+    // $(".modal-body").html("<div class='form'><div class='select'></div><div class='select_opened hide'><ul></ul></div><button>Выбрать</button></div>")
+  
+  }
+}
+
 $("li").click(function() {
   var findedClass = $(this).parent().parent().attr("class");
+  
+  console.log($(this).parent().parent().parent().parent().parent().parent().parent().attr('id'))
   if(findedClass == "select_opened") {
     var text = $(this).text();
     var elementsWithSelectClass = $('.select');
     elementsWithSelectClass.find("span").html(text);
-    $("." + findedClass).addClass("hide");
+    $("." + findedClass).css('display', 'none');
     $(".select").find("img").attr("src", "http://127.0.0.1:8000/images/expand_down.svg")
   }
-  alert(myClass);
+  var el = $(this).parent().parent().parent().parent().parent().parent().parent()
+  if(el.attr('id') == "modal_sell") {
+    href('http://127.0.0.1:8000/sell/' + $(this).find('span').text());
+  }
 });
 
 function sell_confirm(platform_id) {

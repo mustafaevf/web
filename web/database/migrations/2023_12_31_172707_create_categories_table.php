@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('platform_id')->unsigned(); 
+            $table->foreign('platform_id')->references('id')->on('platforms'); 
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.

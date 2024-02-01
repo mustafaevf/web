@@ -21,9 +21,13 @@
                 <img src="{{asset('images/expand_down.svg')}}" alt="">
             </div>
             <div class="select_opened hide">
+                @php
+                    $categories =  App\Models\Category::where('platform_id', $platform->id)->get();
+                @endphp
                 <ul>
-                    <li>Аккаунт</li>
-                    <li>Канал</li>
+                    @foreach ($categories as $category)
+                        <li>{{$category->name}}</li>                        
+                    @endforeach
                 </ul>
             </div>
             <!-- <div class="input">
