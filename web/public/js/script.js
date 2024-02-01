@@ -153,15 +153,19 @@ function openModal(type, id) {
 }
 
 $("li").click(function() {
-  var findedClass = $(this).parent().parent().attr("class");
+  var findedClass = $(this).parent().parent();
   
   console.log($(this).parent().parent().parent().parent().parent().parent().parent().attr('id'))
-  if(findedClass == "select_opened") {
+  if(findedClass.attr("class") == "select_opened") {
     var text = $(this).text();
     var elementsWithSelectClass = $('.select');
     elementsWithSelectClass.find("span").html(text);
-    $("." + findedClass).css('display', 'none');
+    findedClass.addClass("hide")
     $(".select").find("img").attr("src", "http://127.0.0.1:8000/images/expand_down.svg")
+    console.log(findedClass.parent())
+    if(findedClass.attr('id') == "select_for_sell") {
+      href('http://127.0.0.1:8000/sell/' + $(this).find('span').text());
+    }
   }
   var el = $(this).parent().parent().parent().parent().parent().parent().parent()
   if(el.attr('id') == "modal_sell") {

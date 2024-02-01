@@ -68,23 +68,25 @@
                     <img src="{{asset('images/close.svg')}}" alt="">
                 </div>
                 <div class="modal-body">
-                    <div class="select-main">
-                        <div class="select">
-                            <span>Выберите</span>
-                            <img src="{{asset('images/expand_down.svg')}}" alt="">
-                        </div>
-                        <div class="select_opened hide">
-                            @php 
-                                $platforms = App\Models\Platform::where('status', 1)->get();
-                            @endphp
-                            <ul>
-                                @foreach ($platforms as $platform)
-                                    <li>
-                                        <img src="{{asset('images/'. $platform->img)}}" alt="">
-                                        <span>{{$platform->title}}</span>
-                                    </li>
-                                @endforeach
-                            </ul>
+                    <div class="form">
+                        <div class="select-main">
+                            <div class="select">
+                                <span>Выберите</span>
+                                <img src="{{asset('images/expand_down.svg')}}" alt="">
+                            </div>
+                            <div class="select_opened hide" id="select_for_sell">
+                                @php 
+                                    $platforms = App\Models\Platform::where('status', 1)->get();
+                                @endphp
+                                <ul>
+                                    @foreach ($platforms as $platform)
+                                        <li>
+                                            <img src="{{asset('images/'. $platform->img)}}" alt="">
+                                            <span>{{$platform->title}}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     
