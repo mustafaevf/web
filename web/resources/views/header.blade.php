@@ -54,6 +54,7 @@
             <div class="left__container-menu">
                 <a href="/" class="menu_link"><img src="{{asset("images/home.svg")}}" alt="">Главная</a>
                 <a onclick="openModal('sell')" class="menu_link"><img src="{{asset("images/sell.svg")}}" alt="">Продать</a>    
+                <a href="/messages" class="menu_link"><img src="{{asset("images/chat.svg")}}" alt="">Сообщения</a>    
             </div>
         </div>
         <div class="right__container">

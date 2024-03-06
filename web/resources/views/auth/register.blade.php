@@ -1,4 +1,4 @@
-@extends('header')
+@extends('header-auth')
 @section('main')
 <div class="title">Регистрация</div>
 <div class="form">

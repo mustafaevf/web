@@ -1,4 +1,4 @@
-@extends('header')
+@extends('header-auth')
 @section('main')
 <div class="title">Авторизация</div>
 <div class="form">

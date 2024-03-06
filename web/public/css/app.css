@@ -226,6 +226,9 @@ li {
     cursor: pointer;
     border-radius: 4px;
 }
+.menu_active {
+    background: #7ca5f828;
+}
 .menu_link:hover {
     background: #7ca5f828;
     transition: .3s;
@@ -412,7 +415,7 @@ p span {
 .list-left-brand {
     display: flex;
     align-items: center;
-    gap: .3rem;
+    gap: .6rem;
 }
 .list-left-brand img {
     width: 20px;
@@ -439,4 +442,22 @@ p span {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.container-auth {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5rem;
+    padding: 1rem;
+}
+.container-auth .form {
+    width: 100%;
+    padding: 1rem;
+}
+@media (min-width: 480px) {
+    .container-auth .form {
+        width: 500px;
+    }
 }

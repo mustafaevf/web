@@ -56,6 +56,7 @@
                 <a href="/admin/users" class="menu_link"><img src="{{asset("images/sell.svg")}}" alt="">Пользователи</a> 
                 <a href="/admin/products" class="menu_link"><img src="{{asset("images/sell.svg")}}" alt="">Продукты</a>       
                 <a href="/admin/categories" class="menu_link"><img src="{{asset("images/sell.svg")}}" alt="">Категории</a>       
+                <a href="/admin/platforms" class="menu_link"><img src="{{asset("images/sell.svg")}}" alt="">Платформы </a>       
 
             </div>
         </div>

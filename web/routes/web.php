@@ -43,13 +43,24 @@ Route::get('/product/{product_id}', function(?string $product_id = null) {
     return view('product', ['product_id' => $product_id]);
 });
 
+Route::get('/messages', function () {
+    return view('messages');
+});
+
 Route::get('/product/{product_id}', [ProductController::class, 'index']);
 
 Route::get('/admin/users', [AdminController::class, 'pageUsers']);
 Route::get('/admin/products', [AdminController::class, 'pageProducts']);
 Route::get('/admin/categories', [AdminController::class, 'pageCategories']);
+Route::get('/admin/platforms', [AdminController::class, 'pagePlatforms']);
 
 Route::post('/admin/editCategory', [AdminController::class,'editCategory']);
+Route::post('/admin/addCategory', [AdminController::class,'addCategory']);
+Route::post('/admin/deleteCategory', [AdminController::class,'deleteCategory']);
+Route::post('/admin/addPlatform', [AdminController::class,'addPlatform']);
+Route::post('/admin/deletePlatform', [AdminController::class,'deletePlatform']);
+
+
 
 
 Route::post('login', [LoginController::class, 'store']);

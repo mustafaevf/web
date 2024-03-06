@@ -31,7 +31,7 @@ class ProductController extends Controller
         // return response(Category::where('platform_id', $request->platform_id)->get());
         // return response(Category::where('platform_id', $request->platform_id)->where('name', $request->category)->exists());
         if(!Category::where('platform_id', $request->platform_id)->where('name', $request->category)->exists()) {
-            return response("Ошиьба");    
+            return response($request->platform_id . " " . $request->category);    
         }
         
         $category_id = Category::where('platform_id', $request->platform_id)->where('name', $request->category)->first()->id;

@@ -31,7 +31,7 @@
                 <div class="info-block" onclick="openModal('editCategory', {{$category->id}})">
                     <img src="{{asset('images/pen.svg')}}" alt="">
                 </div>
-                <div class="info-block">
+                <div class="info-block" onclick="admin_delete_category({{$category->id}})">
                     <img src="{{asset('images/remove.svg')}}" alt="">
                 </div>
             </div>
@@ -48,10 +48,10 @@
             <div class="modal-body">
                 <div class="form">
                     <div class="input">
-                        <input type="text" placeholder="Название">
+                        <input type="text" placeholder="Название" id="admin_add_category-name">
                     </div>
                     <div class="select-main">
-                        <div class="select">
+                        <div class="select" id="admin_add_category-platform_id">
                             <span>Выберите</span>
                             <img src="{{asset('images/expand_down.svg')}}" alt="">
                         </div>
@@ -69,7 +69,7 @@
                             </ul>
                         </div>
                     </div>
-                    <button>Добавить</button>
+                    <button onclick="admin_add_category()">Добавить</button>
                 </div>
             </div>
         </div>

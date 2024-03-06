@@ -52,7 +52,6 @@ function login() {
       }
     });
 }
-
 function register() {
     const username = $('#auth-login').val();
     const email = $('#auth-email').val();
@@ -87,6 +86,7 @@ function register() {
       }
     });
 }
+
 $('#choose-category').click(function() {
   if($(".select_opened").hasClass("hide")) {
     $(".select_opened").removeClass("hide");
@@ -98,7 +98,8 @@ $('#choose-category').click(function() {
 });
 
 function editCategory(id) {
-  category_name = $(".modal-body").find(".form").find("input").val()
+  category_name = $("#admin_edit_category-name").val()
+  alert(category_name)
   category_id = id
   if(category_id == '' || category_name == '') {
     alert("Заполините все поля")
@@ -134,9 +135,12 @@ function openModal(type, id) {
   if(type == "editCategory") {
     $(".modal-wrapper").last().css('display', 'flex');
     $(".modal-header").last().find('h3').html("Редактирование")
-    $(".modal-body").last().html("<div class='form'><div class='input'><input type='text' placeholder='Название'></div><button onclick='editCategory(" + id +")'>Сохранить</button></div>")
+    $(".modal-body").last().html("<div class='form'><div class='input'><input type='text' id='admin_edit_category-name' placeholder='Название'></div><button onclick='editCategory(" + id +")'>Сохранить</button></div>")
   }
-  // if(type == "addCategory") {
+
+  if(type == "addPlatform") {
+    $('#modal_add').css('display', 'flex');
+  }  // if(type == "addCategory") {
   //   $(".modal-wrapper").css('display', 'flex');
   //   $(".modal-header").find('h3').html("Добавление")
   //   $(".modal-body").html("<div class='form'><div class='input'><input type='text'></div><button onclick='editCategory(" + id +")'>Сохранить</button></div>")
@@ -177,7 +181,8 @@ function sell_confirm(platform_id) {
   title = $("#sell-title").val();
   description = $("#sell-description").val();
   price = $("#sell-price").val();
-  category = $(".select").find("span").text();
+  category = $(".select").first().find("span").text();
+  alert(category)
   info = $("#sell-info").val();
   
   if(category == "Выберите") {
@@ -203,6 +208,116 @@ function sell_confirm(platform_id) {
     data: data,
     success: function(response) {
       console.log(response)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+}
+
+function admin_delete_category(category_id) {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'category_id': category_id
+  } 
+  $.ajax({
+    url: '/admin/deleteCategory', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      alert(response)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+}  
+
+
+
+function admin_add_platform() {
+  platform_title = $('#admin_add_platform-name').val();
+
+  if(platform_title == '') {
+    alert('12312')
+    return
+  }
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'platform_title': platform_title
+  } 
+  $.ajax({
+    url: '/admin/addPlatform', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      alert(response)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+
+}
+
+function admin_delete_platform(platform_id) {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'platform_id': platform_id
+  } 
+  $.ajax({
+    url: '/admin/deletePlatform', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      alert(response)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+}  
+
+
+function admin_add_category() {
+  category_title = $("#admin_add_category-name").val()
+  platform_title = $("#admin_add_category-platform_id").find('span').text()
+  if(category_title == '' || platform_title == '') {
+    alert("заполните все поля")
+    return
+  }
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'category_title': category_title,
+    'platform_title': platform_title
+  } 
+  $.ajax({
+    url: '/admin/addCategory', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      alert(response)
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log(textStatus, errorThrown);
