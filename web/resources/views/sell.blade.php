@@ -2,7 +2,11 @@
 @section('main')
     @php
         $platform = App\Models\Platform::where('title', ucfirst($platform_title))->first();
+        
     @endphp
+    @if (!$platform)
+        {{redirect('error', ['message' => 'нет'])}}
+    @endif
     <div class="title" style="display: flex; align-items: center;">
         {{$platform->title}}
         <img src="{{asset('images/'.$platform->img)}}" alt=""> 

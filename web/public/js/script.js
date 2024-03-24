@@ -231,6 +231,7 @@ function admin_delete_category(category_id) {
     data: data,
     success: function(response) {
       alert(response)
+      console.log(response)
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log(textStatus, errorThrown);
@@ -239,7 +240,36 @@ function admin_delete_category(category_id) {
   });
 }  
 
+function send_message(getter_id) {
+  message_text = $('#message_text').val();
 
+  if(message_text == '') {
+    alert('fill')
+    return
+  }
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'message': message_text,
+    'getter_id': getter_id
+  } 
+  $.ajax({
+    url: '/message', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      alert(response)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+}
 
 function admin_add_platform() {
   platform_title = $('#admin_add_platform-name').val();
@@ -287,6 +317,7 @@ function admin_delete_platform(platform_id) {
     data: data,
     success: function(response) {
       alert(response)
+      console.log(response)
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log(textStatus, errorThrown);

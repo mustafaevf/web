@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Platform;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +25,9 @@ class AdminController extends Controller
 
         if(Category::where('id', $category_id)->exists()) {
 
-            Category::find($category_id)->delete();
+            $category = Category::find($category_id);
+            $category->status = false;
+            $category->save();
 
             return response('Категория удалена');
         }
@@ -108,10 +111,12 @@ class AdminController extends Controller
             return view("error", ['message' => 'У вас нет доступа']);
         }
         $platform_id = $request->platform_id;
+        
         // return response($platform_id);
         if(Platform::where('id', $platform_id)->exists()) {
-            Platform::find($platform_id)->delete();
-            return response('Платформа удалена удалена');
+            $platform = Platform::where('id', $platform_id)->first();
+            $platform->delete();
+            return response('Платформа удалена');
         }
 
         return response('error');

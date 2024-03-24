@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Message\MessageController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -43,11 +45,15 @@ Route::get('/product/{product_id}', function(?string $product_id = null) {
     return view('product', ['product_id' => $product_id]);
 });
 
-Route::get('/messages', function () {
-    return view('messages');
-});
+Route::get('/messages', [MessageController::class, 'viewMessages']);
+
+Route::get('/messages/{user_id}', [MessageController::class, 'index']);
+
+Route::get('/users/{login}', [UserController::class, 'index']);
+Route::get('/users/{login}/reviews', [UserController::class, 'reviews']);
 
 Route::get('/product/{product_id}', [ProductController::class, 'index']);
+Route::post('/message', [MessageController::class,'sendMessage']);
 
 Route::get('/admin/users', [AdminController::class, 'pageUsers']);
 Route::get('/admin/products', [AdminController::class, 'pageProducts']);

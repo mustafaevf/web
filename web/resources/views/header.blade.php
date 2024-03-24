@@ -18,22 +18,24 @@
                         $user = Auth::user();
                     @endphp
                     <div class="block">
-                        <div class="block__inner">
-                            <div class="block-left">
-                                
-                                    <div class="block-avatar">
-                                        <img src="{{asset('/images/'.$user->avatar)}}" alt="">
-                                    </div>
-                                    <div class="block-info">
-                                        <span class="title">{{$user->login}}</span>
-                                        <span class="info">{{$user->balance}} руб.</span>
-                                    </div>
-                                
+                        <a href="/users/{{$user->login}}">
+                            <div class="block__inner">
+                                <div class="block-left">
+                                    
+                                        <div class="block-avatar">
+                                            <img src="{{asset('/images/'.$user->avatar)}}" alt="">
+                                        </div>
+                                        <div class="block-info">
+                                            <span class="title">{{$user->login}}</span>
+                                            <span class="info">{{$user->balance}} руб.</span>
+                                        </div>
+                                    
+                                </div>
+                                <div class="block-right">
+                                    <a href="/logout" class="btn-error">Выйти</a>
+                                </div>
                             </div>
-                            <div class="block-right">
-                                <a href="/logout" class="btn-error">Выйти</a>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="items__flex">
                         <a href="/pay" class="btn-primary">Пополнить</a>
@@ -70,11 +72,29 @@
                 </div>
                 <div class="modal-body">
                     <div class="form">
-                        <div class="select-main">
+                        <div class="input">
+                            <img src="http://127.0.0.1:8000/images/search.png" alt="">
+                            <input type="text" placeholder="Введите название товара">
+                        </div>
+                        <div class="main-platforms" style="margin-top: 0">
+                            @php 
+                            $platforms = App\Models\Platform::where('status', 1)->get();
+                            @endphp
+                            @foreach ($platforms as $platform)
+
+                                <a href="/sell/{{strtolower($platform->title)}}">
+                                    <div class="platform-block">
+                                        <img src="{{asset('images/'. $platform->img)}}" alt="">
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                        {{-- <div class="select-main">
                             <div class="select">
                                 <span>Выберите</span>
                                 <img src="{{asset('images/expand_down.svg')}}" alt="">
                             </div>
+
                             <div class="select_opened hide" id="select_for_sell">
                                 @php 
                                     $platforms = App\Models\Platform::where('status', 1)->get();
@@ -88,7 +108,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     
                 </div>

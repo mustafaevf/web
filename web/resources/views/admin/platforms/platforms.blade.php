@@ -24,6 +24,9 @@
                 <div class="list-left-brand">
                     <img src="{{asset('images/'. $platform->img)}}" alt="">
                     <p>{{$platform->title}}</p>
+                    @if (!$platform->status)
+                        <span>Отключена</span>
+                    @endif
                 </div>
         
             </div>

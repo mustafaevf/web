@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('platform_id')->unsigned(); 
-            $table->foreign('platform_id')->references('id')->on('platforms'); 
+            $table->foreign('platform_id')->references('id')->on('platforms')->onDelete('cascade');; 
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
