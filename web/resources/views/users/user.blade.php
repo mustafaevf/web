@@ -9,7 +9,7 @@
             {{$user->login}}
         </div>
         <div class="user-register">
-            Дата регистрации {{$user->created_at}}
+            Дата регистрации {{FormateDate($user->created_at)}}
         </div>
         <div class="user-rating">
             <div class="rating-star">
