@@ -10,124 +10,88 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
-    <div class="wrapper">
-        <div class="left__container">
-            <div class="left__container-header">
-                @if (Auth::user())
-                    @php
-                        $user = Auth::user();
-                    @endphp
-                    <div class="block">
-                        <a href="/users/{{$user->login}}">
-                            <div class="block__inner">
-                                <div class="block-left">
-                                    
-                                        <div class="block-avatar">
-                                            <img src="{{asset('/images/'.$user->avatar)}}" alt="">
-                                        </div>
-                                        <div class="block-info">
-                                            <span class="title">{{$user->login}}</span>
-                                            <span class="info">{{$user->balance}} руб.</span>
-                                        </div>
-                                    
-                                </div>
-                                <div class="block-right">
-                                    <a href="/logout" class="btn-error">Выйти</a>
-                                </div>
-                            </div>
-                        </a>
+    <div class="wrapper flex">
+        <div class="sidebar flex">
+            @if (Auth::user())
+                @php
+                    $user = Auth::user();
+                @endphp
+                <div class="sidebar_header flex">
+                    <img src="{{asset('/images/'.$user->avatar)}}" class="avatar">
+                    <div class="info flex">
+                        <div class="main_text">{{$user->login}}</div>
+                        <div class="secondary_text">{{$user->balance}} ₽</div>
                     </div>
-                    <div class="items__flex">
-                        <a href="/pay" class="btn-primary">Пополнить</a>
-                        <a href="/withdraw" class="btn-primary">Вывод</a>
-                    </div>
-                @else
-                    <div class="block">
-                        <div class="block__inner">
-                            <a href="/login" class="btn-info">Авторизация</a>    
-
-                        </div>
-
-                    </div>
-                
-                @endif
-            </div>
-            <hr>
-            <div class="left__container-menu">
-                <a href="/" class="menu_link"><img src="{{asset("images/home.svg")}}" alt="">Главная</a>
-                <a onclick="openModal('sell')" class="menu_link"><img src="{{asset("images/sell.svg")}}" alt="">Продать</a>    
-                <a href="/messages" class="menu_link"><img src="{{asset("images/chat.svg")}}" alt="">Сообщения</a>    
+                </div>
+            @else
+                <div class="sidebar_header flex">
+                    <button id="open-modal-auth">Войти</button>
+                </div>
+            @endif
+            
+            <div class="sidebar_menu">
+               
+                <div class="sidebar-link flex active">
+                    <img src="{{asset('images/home.svg')}}" alt="">
+                    <a href="/">Главная</a>
+                </div>
+            
+                <div class="sidebar-link flex">
+                    <img src="{{asset('images/chat.svg')}}" alt="">
+                    <a href="/messages">Сообщения</a>
+                </div>
+                <div class="sidebar-link flex">
+                    <img src="{{asset('images/sell.svg')}}" alt="">
+                    <a href="/sell">Продать</a>
+                </div>
+                <div class="line"></div>
+                <div class="sidebar-link flex">
+                    <img src="{{asset('images/sell.svg')}}" alt="">
+                    <a href="/logout">Выйти</a>
+                </div>
             </div>
         </div>
-        <div class="right__container">
+        <div class="content flex">
             @yield('main')
         </div>
     </div>
-    <div class="modal-wrapper" id="modal_sell" style="display: none;">
-        <div class="modal-container">
-            <div class="modal">
-                <div class="modal-header">
-                    <h3>Выберите платформу</h3>
-                    <img src="{{asset('images/close.svg')}}" alt="">
-                </div>
-                <div class="modal-body">
-                    <div class="form">
-                        <div class="input">
-                            <img src="http://127.0.0.1:8000/images/search.png" alt="">
-                            <input type="text" placeholder="Введите название товара">
-                        </div>
-                        <div class="main-platforms" style="margin-top: 0">
-                            @php 
-                            $platforms = App\Models\Platform::where('status', 1)->get();
-                            @endphp
-                            @foreach ($platforms as $platform)
-
-                                <a href="/sell/{{strtolower($platform->title)}}">
-                                    <div class="platform-block">
-                                        <img src="{{asset('images/'. $platform->img)}}" alt="">
-                                    </div>
-                                </a>
-                            @endforeach
-                        </div>
-                        {{-- <div class="select-main">
-                            <div class="select">
-                                <span>Выберите</span>
-                                <img src="{{asset('images/expand_down.svg')}}" alt="">
-                            </div>
-
-                            <div class="select_opened hide" id="select_for_sell">
-                                @php 
-                                    $platforms = App\Models\Platform::where('status', 1)->get();
-                                @endphp
-                                <ul>
-                                    @foreach ($platforms as $platform)
-                                        <li>
-                                            <img src="{{asset('images/'. $platform->img)}}" alt="">
-                                            <span>{{$platform->title}}</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div> --}}
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+    <div class="popup" style="display: none">
+        <div class="main_text">Ошибка</div>
     </div>
-    <div class="modal-wrapper" style="display: none;">
-        <div class="modal-container">
-            <div class="modal">
-                <div class="modal-header">
-                    <h3>Авторизация</h3>
-                    <img src="{{asset('images/close.svg')}}" alt="">
+    <div class="modal-wrapper" style="display: none">
+        <div class="modal" id="modal-auth">
+            <div class="modal-header">
+                <div class="main_text middle">Авторизация</div>
+                <img src="{{asset('images/close.svg')}}" class="close" alt="">
+            </div>
+            <div class="modal-body">
+                <div class="form_col" style="margin-top: .5rem;">
+                    <div class="secondary_text">Имя пользователя</div>
+                    <div class="input">
+                        <input type="text" min-length="0" max-length="20" id="auth-login" placeholder="Имя пользователя">
+                    </div>
                 </div>
-                <div class="modal-body">
-
+                <div class="form_col">
+                    <div class="secondary_text">Пароль</div>
+                    <div class="input">
+                        <input type="password" min-length="0" max-length="100" id="auth-password" placeholder="Пароль">
+                    </div>
+                </div>
+                <div class="form_col">
+                    <button id="auth-login-submit">Войти</button>
+                </div>
+                <div class="line mt-1"></div>
+                <div class="form_col">
+                    <button class="btn-vk">Войти через Вконтакте</button>
+                </div>
+                <div class="form_col">
+                    <button class="btn-telegram">Войти через Телеграмм</button>
                 </div>
             </div>
         </div>
     </div>
     <script src="{{asset('js/script.js')}}"></script>
+    <script src="{{asset('js/validate.js')}}"></script>
+    <script src="{{asset('js/select.js')}}"></script>
 </body>
 </html>
