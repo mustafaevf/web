@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Param;
 use App\Models\Platform;
 use App\Models\User;
 use Carbon\Carbon;
@@ -13,6 +14,27 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function addParams(Request $request) {
+        $user = Auth::user();
+        if(!$user) {
+            return view("error", ['message' => 'Войдите в аккаунт']);            
+        }
+        if($user->status != 2) {
+            return view("error", ['message' => 'У вас нет доступа']);
+        }
+        $platform_id = Category::where('id', $request->category_id)->first()->platform_id;
+        $data = [
+            'title' => $request->title,
+            'type' => $request->type,
+            'attr' => $request->attr,
+            'status' => 1,
+            'category_id'=> $request->category_id,
+            'platform_id'=>$platform_id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ];
+        Param::insert($data);
+    }
 
     public function deleteCategory(Request $request) {
         $user = Auth::user();

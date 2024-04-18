@@ -107,7 +107,7 @@
                     </div>
                     <div class="product-right">
                         <div class="product-price">
-                            {{$product->price}} ₽
+                            {{FormateMoney($product->price)}}
                         </div>
                     </div>
                 </div>

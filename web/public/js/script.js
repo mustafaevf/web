@@ -136,6 +136,38 @@ $('#edit-user-submit').click(function() {
   });
 });
 
+$('#add-params-submit').click(function() {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'title': $("#add-params-title").val(),
+    'type': $("#add-params-type").attr("attr-select"),
+    'attr':  $("#add-params-attr").val(),
+    'category_id': $(this).attr("attr-category-id")
+  } 
+  $.ajax({
+    url: '/admin/addParams', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      console.log(response);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+});
+
+$('.open-modal-add-params').click(function() {
+  var category_id = $(this).attr("attr-category-id");
+  $('#add-params-submit').attr("attr-category-id", category_id);
+  $('#modal-add-params').parent().fadeIn();
+});
+
 $('.open-modal-edit-user').click(function() {
   var user_id = $(this).attr("attr-user-id");
   var td = $(this).find("td");
@@ -145,6 +177,7 @@ $('.open-modal-edit-user').click(function() {
 
   $("#edit-user-login").val(user_login);
   $("#edit-user-balance").val(balance);
+  alert(balance)
   $("#edit-user-status").val(status);
   $("#edit-user-submit").attr("attr-user-id", user_id);
   $('#modal-edit-user').parent().fadeIn();

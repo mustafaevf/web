@@ -162,9 +162,12 @@ button:hover {
     background: var(--color-primary-hover);
     transition: .3s;
 }
-.btn-vk {
-    background: rgb(0, 119, 255);
+.btn-black {
+    background: transparent;
+    border: 1px soldi var(--color-border);
+
 }
+
 .btn-telegram {
     background: #0088cc;
 }
@@ -183,6 +186,7 @@ input:-webkit-autofill {
 .dropdown-main {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .select {
     width: 100%;
@@ -490,4 +494,21 @@ table tbody tr:nth-child(odd){
 }
 table tbody tr:nth-child(even){
 	background: var(--color-bg-main);
+}
+@media (max-width: 1000px) {
+    .sidebar {
+        display: none;
+    }
+    .info-wrapper {
+        flex-direction: column;
+    }
+    .info-right {
+        width: 100%;
+    }
+    .steps {
+        display: none;
+    }
+    .content {
+        padding: 1rem;
+    }
 }

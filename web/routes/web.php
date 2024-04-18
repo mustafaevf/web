@@ -65,6 +65,7 @@ Route::get('/admin/users', [AdminController::class, 'pageUsers']);
 Route::get('/admin/products', [AdminController::class, 'pageProducts']);
 Route::get('/admin/categories', [AdminController::class, 'pageCategories']);
 Route::get('/admin/platforms', [AdminController::class, 'pagePlatforms']);
+Route::get('/admin/category/{category_id}', [AdminController::class, 'pageOneCategory']);
 
 Route::post('/admin/editCategory', [AdminController::class,'editCategory']);
 Route::post('/admin/addCategory', [AdminController::class,'addCategory']);
@@ -72,7 +73,7 @@ Route::post('/admin/deleteCategory', [AdminController::class,'deleteCategory']);
 Route::post('/admin/addPlatform', [AdminController::class,'addPlatform']);
 Route::post('/admin/deletePlatform', [AdminController::class,'deletePlatform']);
 Route::post('/admin/editUser', [AdminController::class, 'editUser']);
-
+Route::post('/admin/addParams', [AdminController::class, "addParams"]);
 
 
 Route::post('login', [LoginController::class, 'store']);
