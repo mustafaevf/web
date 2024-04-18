@@ -17,3 +17,14 @@ $('.select-option').click(function () {
         $(this).parent().parent().find('img').attr("src", "/images/expand_down.svg");
     }
 });
+
+$('.dropdown-main').click(function() {
+    parent = $(this).parent().parent()
+    if($(parent).find(".dropdown-options").css("display") == "none") {
+        $(this).find('img').attr("src", "/images/expand_up.svg");
+        $(parent).find(".dropdown-options").slideDown(500);
+    } else {
+        $(this).find('img').attr("src", "/images/expand_down.svg");
+        $(parent).find(".dropdown-options").slideUp(500);
+    }
+});

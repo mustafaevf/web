@@ -20,7 +20,7 @@
                     <img src="{{asset('/images/'.$user->avatar)}}" class="avatar">
                     <div class="info flex">
                         <div class="main_text">{{$user->login}}</div>
-                        <div class="secondary_text">{{$user->balance}} ₽</div>
+                        <div class="secondary_text">{{FormateMoney($user->balance)}}</div>
                     </div>
                 </div>
             @else
@@ -44,11 +44,40 @@
                     <img src="{{asset('images/sell.svg')}}" alt="">
                     <a href="/sell">Продать</a>
                 </div>
-                <div class="line"></div>
-                <div class="sidebar-link flex">
-                    <img src="{{asset('images/sell.svg')}}" alt="">
-                    <a href="/logout">Выйти</a>
-                </div>
+                
+                @if (Auth::user())
+                    <div class="line"></div>
+                    <div class="sidebar-link flex">
+                        <img src="{{asset('images/sell.svg')}}" alt="">
+                        <a href="/logout">Выйти</a>
+                    </div>
+                    @if ($user->status == 2)
+                        <div class="line"></div>
+                        <div class="sidebar-link flex">
+                            <div class="dropdown">
+                                <div class="dropdown-main">
+                                    <div class="secondary_text">Админка</div>
+                                    <img src="{{asset('images/expand_down.svg')}}" alt="">
+                                </div>
+                                <div class="dropdown-options" style="display: none">
+                                    <div class="sidebar-link flex">
+                                        <a href="/admin/users">Пользователи</a>
+                                    </div>
+                                    <div class="sidebar-link flex">
+                                        <a href="/admin/categories">Категории</a>
+                                    </div>
+                                    <div class="sidebar-link flex">
+                                        <a href="/admin/products">Продукты</a>
+                                    </div>
+                                    <div class="sidebar-link flex">
+                                        <a href="/admin/platforms">Платформы</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endif
+               
             </div>
         </div>
         <div class="content flex">

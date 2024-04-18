@@ -45,6 +45,9 @@ a, a:hover {
     border-radius: 10px;
     transition: .3s;
 }
+.box.active {
+    background: var(--color-bg-secondary);
+}
 .box_type2:hover {
     background: var(--color-bg-secondary);
     transition: .3s;
@@ -172,6 +175,14 @@ input:-webkit-autofill {
     width: 100%;
     background: transparent;
     color: var(--color-text-secondary);
+}
+.dropdown {
+    width: 100%;
+    cursor: pointer;
+}
+.dropdown-main {
+    display: flex;
+    justify-content: space-between;
 }
 .select {
     width: 100%;
@@ -456,4 +467,27 @@ input:-webkit-autofill {
 }
 .modal-body {
     padding: 1rem;
+}
+
+table{
+	border: 1px solid var(--color-border);
+	table-layout: fixed;
+	width: 100%;
+	margin-bottom: 20px;
+}
+table th {
+	font-weight: bold;
+	padding: 5px;
+    
+	background: transparent;
+	/* border: 1px solid var(--color-border); */
+}
+table td{
+	text-align: center;
+}
+table tbody tr:nth-child(odd){
+	background: var(--color-bg-secondary);
+}
+table tbody tr:nth-child(even){
+	background: var(--color-bg-main);
 }

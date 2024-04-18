@@ -1,27 +1,6 @@
-// const { redirect } = require("express/lib/response");
-
-// const { param } = require("express/lib/request");
-
 function href(link) {
   window.location.href = link;
 }
-
-// $('img').click(function () {
-//   if($(this).parent().attr('class') == 'modal-header') {
-//     $(this).parent().parent().parent().parent().css('display', 'none')
-//   }
-// })
-
-$('.select-main').click(function() {
-  el = $(this).find('.select_opened')
-  if(el.hasClass("hide")) {
-    el.removeClass("hide");
-    $(this).find(".select").find("img").attr("src", "http://127.0.0.1:8000/images/expand_up.svg")
-  } else {
-    el.addClass("hide");
-    $(this).find(".select").find("img").attr("src", "http://127.0.0.1:8000/images/expand_down.svg")
-  }
-})
 
 $('#auth-login-submit').click(function() {
   const username = $('#auth-login').val();
@@ -89,15 +68,6 @@ function register() {
     });
 }
 
-$('#choose-category').click(function() {
-  if($(".select_opened").hasClass("hide")) {
-    $(".select_opened").removeClass("hide");
-    $(this).find("img").attr("src", "http://127.0.0.1:8000/images/expand_up.svg")
-  } else {
-    $(".select_opened").addClass("hide");
-    $(this).find("img").attr("src", "http://127.0.0.1:8000/images/expand_down.svg")
-  }
-});
 
 function editCategory(id) {
   category_name = $("#admin_edit_category-name").val()
@@ -139,30 +109,47 @@ function CreateNotify(text) {
   }, 2000);
 }
 
-function openModal(type, id) {
-  if(type == "editCategory") {
-    $(".modal-wrapper").last().css('display', 'flex');
-    $(".modal-header").last().find('h3').html("Редактирование")
-    $(".modal-body").last().html("<div class='form'><div class='input'><input type='text' id='admin_edit_category-name' placeholder='Название'></div><button onclick='editCategory(" + id +")'>Сохранить</button></div>")
-  }
 
-  if(type == "addPlatform") {
-    $('#modal_add').css('display', 'flex');
-  }  // if(type == "addCategory") {
-  //   $(".modal-wrapper").css('display', 'flex');
-  //   $(".modal-header").find('h3').html("Добавление")
-  //   $(".modal-body").html("<div class='form'><div class='input'><input type='text'></div><button onclick='editCategory(" + id +")'>Сохранить</button></div>")
-  // }
-  if(type == "addCategory") {
-    $('#modal_add').css('display', 'flex');
-  }
-  if(type == "sell") {
-    $("#modal_sell").css('display', 'flex');
-    // $(".modal-header").find('h3').html("Выберите платформу")
-    // $(".modal-body").html("<div class='form'><div class='select'></div><div class='select_opened hide'><ul></ul></div><button>Выбрать</button></div>")
-  
-  }
-}
+$('#edit-user-submit').click(function() {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'login': $("#edit-user-login").val(),
+    'balance': $("#edit-user-balance").val(),
+    'status':  $("#edit-user-status").val(),
+    'user_id': $("#edit-user-submit").attr("attr-user-id")
+  } 
+  $.ajax({
+    url: '/admin/editUser', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      CreateNotify(response);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+});
+
+$('.open-modal-edit-user').click(function() {
+  var user_id = $(this).attr("attr-user-id");
+  var td = $(this).find("td");
+  var user_login = td[0].innerText
+  var balance = td[1].innerText
+  var status = td[2].innerText
+
+  $("#edit-user-login").val(user_login);
+  $("#edit-user-balance").val(balance);
+  $("#edit-user-status").val(status);
+  $("#edit-user-submit").attr("attr-user-id", user_id);
+  $('#modal-edit-user').parent().fadeIn();
+});
+
 $('#open-modal-auth').click(function() {
   $('#modal-auth').parent().fadeIn();
 });
@@ -177,65 +164,6 @@ $('.close').click(function() {
   }
 })
 
-$("li").click(function() {
-  var findedClass = $(this).parent().parent();
-  
-  console.log($(this).parent().parent().parent().parent().parent().parent().parent().attr('id'))
-  if(findedClass.attr("class") == "select_opened") {
-    var text = $(this).text();
-    var elementsWithSelectClass = $('.select');
-    elementsWithSelectClass.find("span").html(text);
-    findedClass.addClass("hide")
-    $(".select").find("img").attr("src", "http://127.0.0.1:8000/images/expand_down.svg")
-    console.log(findedClass.parent())
-    if(findedClass.attr('id') == "select_for_sell") {
-      href('http://127.0.0.1:8000/sell/' + $(this).find('span').text());
-    }
-  }
-  var el = $(this).parent().parent().parent().parent().parent().parent().parent()
-  if(el.attr('id') == "modal_sell") {
-    href('http://127.0.0.1:8000/sell/' + $(this).find('span').text());
-  }
-});
-
-function sell_confirm(platform_id) {
-  title = $("#sell-title").val();
-  description = $("#sell-description").val();
-  price = $("#sell-price").val();
-  category = $(".select").first().find("span").text();
-  alert(category)
-  info = $("#sell-info").val();
-  
-  if(category == "Выберите") {
-    alert("Выберите категорию товара")
-    return;
-  }
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  const data = {
-    'title': title,
-    'description': description,
-    'price': price,
-    'category': category,
-    'info': info,
-    'platform_id': platform_id
-  } 
-  $.ajax({
-    url: '/addProduct', 
-    type: 'POST',
-    data: data,
-    success: function(response) {
-      console.log(response)
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log(textStatus, errorThrown);
-      alert('Ошибка при отправке данных на сервер!');
-    }
-  });
-}
 
 function admin_delete_category(category_id) {
   $.ajaxSetup({
@@ -377,3 +305,9 @@ function admin_add_category() {
     }
   });
 }
+
+$(".choose_btn").click(function () {
+  parent = $(this).parent()
+  parent.find(".choose_btn").removeClass("active");
+  $(this).addClass("active");
+});

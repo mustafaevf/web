@@ -36,8 +36,3 @@ $("button").click(function () {
     SwitchSteps(parent);
 });
 
-$(".choose_btn").click(function () {
-    parent = $(this).parent()
-    parent.find(".choose_btn").removeClass("active");
-    $(this).addClass("active");
-});
