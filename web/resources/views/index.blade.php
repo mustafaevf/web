@@ -10,15 +10,49 @@
         $platforms = App\Models\Platform::where('status', 1)->get();
     @endphp
     @foreach($platforms as $platform)
-        <a href="/platforms/{{strtolower($platform->title)}}">
+        @if ($viewPlatform != -1)
+            @if ($platform->id == $viewPlatform)
+                <a href="/platforms/{{strtolower($platform->title)}}">
+                    <div class="platform box flex active">
+                        <img src="{{ asset('images/' . $platform->img) }}" alt="">
+                        <div class="main_text">{{$platform->title}}</div>
+                    </div>
+                </a>
+            @else
+            <a href="/platforms/{{strtolower($platform->title)}}">
+                <div class="platform box flex">
+                    <img src="{{ asset('images/' . $platform->img) }}" alt="">
+                    <div class="main_text">{{$platform->title}}</div>
+                </div>
+            </a>
+            @endif        
+        @else
+            <a href="/platforms/{{strtolower($platform->title)}}">
+                <div class="platform box flex">
+                    <img src="{{ asset('images/' . $platform->img) }}" alt="">
+                    <div class="main_text">{{$platform->title}}</div>
+                </div>
+            </a>
+        @endif
+        
+        
+    @endforeach
+</div>
+@if ($viewPlatform != -1)
+<div class="main_text big mt-1">Категории</div>
+<div class="platforms flex">
+    @php
+        $categories = App\Models\Category::where('platform_id', $viewPlatform)->get();
+    @endphp
+    @foreach($categories as $category)
+        <a href="{{url()->current()}}/{{strtolower(Translit($category->name, 0))}}">
             <div class="platform box flex">
-                <img src="{{ asset('images/' . $platform->img) }}" alt="">
-                <div class="main_text">{{$platform->title}}</div>
+                <div class="main_text">{{$category->name}}</div>
             </div>
         </a>
     @endforeach
-    
 </div>
+@endif
 <div class="products">
     <div class="main_text middle">
         Фильтры
@@ -42,9 +76,6 @@
         </div>
     </div>  
     <div class="products_">
-        @php
-            $products = App\Models\Product::where('status', 1)->get();
-        @endphp
         @foreach($products as $product)
             @php
                 $pl = App\Models\Platform::where('id', $product->platform_id)->first();
@@ -52,8 +83,8 @@
                 $seller = App\Models\User::where('id', $product->user_id)->first();
             @endphp
             <a href="/product/{{$product->id}}">
-                <div class="product box flex">
-                    <div class="product-left">
+                <div class="product box box_type2 flex">
+                    <div class="product-left">  
                         <div class="product-title">
                             {{$product->title}}
                         </div>
