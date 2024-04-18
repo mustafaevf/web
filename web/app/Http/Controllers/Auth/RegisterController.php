@@ -12,7 +12,7 @@ class RegisterController extends Controller
 {
     public function store(Request $request) {
         if($request->repassword != $request->password) {
-            return response('Пароли введены неверно');
+            return response('Ошибка, пароли должны совпадать');
         }
         $validated = $request->validate([
             'username' => 'required|max:255',
@@ -27,7 +27,7 @@ class RegisterController extends Controller
 
             if($existingUser) 
             {
-                return response('User with the given email or username already exists.');
+                return response('Ошибка, почта занята');
             }
             $data = [
                 'login' => $request->username,
@@ -41,7 +41,7 @@ class RegisterController extends Controller
         } 
         else 
         {
-            return response('error');
+            return response('Ошибка, заполните все поля');
         }
         
     }

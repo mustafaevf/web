@@ -6,11 +6,11 @@ function href(link) {
   window.location.href = link;
 }
 
-$('img').click(function () {
-  if($(this).parent().attr('class') == 'modal-header') {
-    $(this).parent().parent().parent().parent().css('display', 'none')
-  }
-})
+// $('img').click(function () {
+//   if($(this).parent().attr('class') == 'modal-header') {
+//     $(this).parent().parent().parent().parent().css('display', 'none')
+//   }
+// })
 
 $('.select-main').click(function() {
   el = $(this).find('.select_opened')
@@ -23,35 +23,37 @@ $('.select-main').click(function() {
   }
 })
 
-function login() {
-    const username = $('#auth-username').val();
-    const password = $('#auth-password').val();
-  
-    $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-      url: '/login', 
-      type: 'POST',
-      data: {
-        username: username,
-        password: password
-      },
-      success: function(response) {
-        if(response == 'ok') {
-          href('/');
-        }
-        console.log(response)
-        
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-        alert('Ошибка при отправке данных на сервер!');
+$('#auth-login-submit').click(function() {
+  const username = $('#auth-login').val();
+  const password = $('#auth-password').val();
+
+  $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
-    });
-}
+  });
+  $.ajax({
+    url: '/login', 
+    type: 'POST',
+    data: {
+      username: username,
+      password: password
+    },
+    success: function(response) {
+      if(response == 'ok') {
+        href('/');
+      }
+      CreateNotify(response)
+      
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+})
+    
+
 function register() {
     const username = $('#auth-login').val();
     const email = $('#auth-email').val();
@@ -129,7 +131,13 @@ function editCategory(id) {
   });
 }
 
-
+function CreateNotify(text) {
+  $('.popup').find('.main_text').text(text);
+  $('.popup').fadeIn();
+  setTimeout(function() {
+    $('.popup').fadeOut();
+  }, 2000);
+}
 
 function openModal(type, id) {
   if(type == "editCategory") {
@@ -155,6 +163,19 @@ function openModal(type, id) {
   
   }
 }
+$('#open-modal-auth').click(function() {
+  $('#modal-auth').parent().fadeIn();
+});
+
+$('#open-modal-buy').click(function () {
+  $('#modal-buy').parent().fadeIn();
+});
+
+$('.close').click(function() {
+  if($(this).parent().parent().parent().attr("class") == "modal-wrapper") {
+    $(this).parent().parent().parent().fadeOut();
+  }
+})
 
 $("li").click(function() {
   var findedClass = $(this).parent().parent();

@@ -12,6 +12,8 @@ class LoginController extends Controller
 {
     public function store(Request $request) {
         $login = $request->username;
+        
+
         $password = Hash::make($request->password);
         $existingUser = User::where('login', $request->username)->exists();
         if($existingUser) 
@@ -33,6 +35,8 @@ class LoginController extends Controller
         {
             return response('Пользователь не найден');
         }
+
+        
 
     }
 }
