@@ -7,11 +7,13 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Message\MessageController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [IndexController::class, 'index']);
+Route::get('/platforms/{platform_title}', [IndexController::class, 'viewPlatforms']);
+Route::get('/platforms/{platform_title}/{category}', [IndexController::class, 'viewCategories']);
+
 
 Route::get('/login', function () {
     return view('auth/login');
@@ -34,12 +36,16 @@ Route::get('/withdraw', function () {
 });
 
 Route::get('/sell', function() {
-    return view('sell');
+    if(Auth::user()) {
+        return view('sell');
+    } else {
+        return view('error', ['message' => 'Log in']);
+    }
 });
 
-Route::get('/platforms/{platform_title?}', function (?string $platform_title = null) {
-    return view('platforms', ['platform_title' => $platform_title]);
-});
+// Route::get('/platforms/{platform_title?}', function (?string $platform_title = null) {
+//     return view('platforms', ['platform_title' => $platform_title]);
+// });
 
 Route::get('/product/{product_id}', function(?string $product_id = null) {
     return view('product', ['product_id' => $product_id]);
@@ -65,7 +71,7 @@ Route::post('/admin/addCategory', [AdminController::class,'addCategory']);
 Route::post('/admin/deleteCategory', [AdminController::class,'deleteCategory']);
 Route::post('/admin/addPlatform', [AdminController::class,'addPlatform']);
 Route::post('/admin/deletePlatform', [AdminController::class,'deletePlatform']);
-
+Route::post('/admin/editUser', [AdminController::class, 'editUser']);
 
 
 

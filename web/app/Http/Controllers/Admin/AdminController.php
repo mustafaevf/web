@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Platform;
+use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -50,6 +51,33 @@ class AdminController extends Controller
         $category->name = $name;
         $category->save();
         return response("ok");
+    }
+
+    public function editUser(Request $request) {
+        $user = Auth::user();
+        if(!$user) {
+            return view("error", ['message' => 'Войдите в аккаунт']);            
+        }
+        if($user->status != 2) {
+            return view("error", ['message' => 'У вас нет доступа']);
+        }
+        $current_user = User::where('id', $request->user_id)->first();
+        if($current_user) {
+            if($current_user->login != $request->login) {
+                $current_user->login = $request->login;
+            }
+            if($current_user->balance != $request->balance) {
+                $current_user->balance = $request->balance;
+            }
+            if($current_user->status != $request->status) {
+                $current_user->status = $request->status;
+            }
+            $current_user->save(); 
+            return response("Успешно");
+        } else {
+            return response("Ошибка");
+        }
+        
     }
     public function addCategory(Request $request) {
         $user = Auth::user();
