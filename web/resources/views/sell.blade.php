@@ -37,9 +37,7 @@
 <div class="step_2" style="display: none;">
     <div class="main_text big mt-1">Выберите категорию</div>
     <div class="platforms flex">
-            <div class="platform box box_type2 flex">
-                <div class="main_text">Аккаунт</div>
-            </div>
+        
     </div>
 </div>
 

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function addParams(Request $request) {
+    public function addParam(Request $request) {
         $user = Auth::user();
         if(!$user) {
             return view("error", ['message' => 'Войдите в аккаунт']);            
@@ -34,8 +34,26 @@ class AdminController extends Controller
             'updated_at' => Carbon::now()
         ];
         Param::insert($data);
+        return response("Успешно, параметр добавлен");
     }
+    public function deleteParam(Request $request) {
+        $user = Auth::user();
+        if(!$user) {
+            return view("error", ['message' => 'Войдите в аккаунт']);            
+        }
+        if($user->status != 2) {
+            return view("error", ['message' => 'У вас нет доступа']);
+        }
+        $param_id = $request->param_id;
+        
+        if(Param::where('id', $param_id)->exists()) {
+            $param = Param::where('id', $param_id)->first();
+            $param->delete();
+            return response('Успешно, параметр удален');
+        }
+        return response("Ошибка удаления");
 
+    }
     public function deleteCategory(Request $request) {
         $user = Auth::user();
         if(!$user) {
@@ -109,22 +127,22 @@ class AdminController extends Controller
         if($user->status != 2) {
             return view("error", ['message' => 'У вас нет доступа']);
         }
-        $platform_title = $request->platform_title;
-        $category_title = $request->category_title;
-        $platform = Platform::where('title', $platform_title)->first();
-        if(Category::where('name', $category_title)->where('platform_id', $platform->id)->exists()) {
+        $platform_id = $request->platform_id;
+        $name = $request->name;
+        $platform = Platform::where('id', $platform_id)->first();
+        if(Category::where('name', $name)->where('platform_id', $platform->id)->exists()) {
             return response('Такая категория есть');
         }
         // return response(Category::where('name', $category_title)->where('platform_id', $platform->id)->count());
         $data = [
-            'name' => $category_title,
+            'name' => $name,
             'platform_id' => $platform->id,
             'status' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ];
         Category::insert($data);
-        return response('ok');
+        return response('Успешно, категория добавлена');
     }
 
     public function addPlatform(Request $request) {
@@ -135,21 +153,20 @@ class AdminController extends Controller
         if($user->status != 2) {
             return view("error", ['message' => 'У вас нет доступа']);
         }
-        $platform_title = $request->platform_title;
+        $platform_title = $request->title;
         if(Platform::where('title', $platform_title)->exists()) {
-            return response('такая платформа е сть');
+            return response('Ошибка, такая платформа уже есть');
         }
-        $img =  strtolower(str_replace(' ', '', $platform_title)) .".svg";
         // return response($img);
         $data = [
             'title' => $platform_title,
-            'img' => $img,
+            'img' => $request->img,
             'status' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ];
         Platform::insert($data);
-        return response('ok');
+        return response('Успешно, платформа добавлена');
     }
 
     public function deletePlatform(Request $request) {

@@ -1,13 +1,17 @@
 @extends('header')
 @section('main')
 
+
 <div class="input">
     <input type="text" placeholder="Введите название товара, категории или платформы">
 </div>
-<div class="main_text big mt-1">Платформы</div>
+
+<div class="main_text big mt-1 flex">Платформы</div>
+    
 <div class="platforms flex">
     @php
         $platforms = App\Models\Platform::where('status', 1)->get();
+        $viewPlatform = -1;
     @endphp
     @foreach($platforms as $platform)
         @if ($viewPlatform != -1)
@@ -15,14 +19,14 @@
                 <a href="/platforms/{{strtolower($platform->title)}}">
                     <div class="platform box flex active">
                         <img src="{{ asset('images/' . $platform->img) }}" alt="">
-                        <div class="main_text">{{$platform->title}}</div>
+                        <div class="main_text middle">{{$platform->title}}</div>
                     </div>
                 </a>
             @else
             <a href="/platforms/{{strtolower($platform->title)}}">
                 <div class="platform box flex">
                     <img src="{{ asset('images/' . $platform->img) }}" alt="">
-                    <div class="main_text">{{$platform->title}}</div>
+                    <div class="main_text middle">{{$platform->title}}</div>
                 </div>
             </a>
             @endif        
@@ -30,7 +34,7 @@
             <a href="/platforms/{{strtolower($platform->title)}}">
                 <div class="platform box flex">
                     <img src="{{ asset('images/' . $platform->img) }}" alt="">
-                    <div class="main_text">{{$platform->title}}</div>
+                    <div class="main_text middle">{{$platform->title}}</div>
                 </div>
             </a>
         @endif
@@ -38,6 +42,7 @@
         
     @endforeach
 </div>
+<a href="{{route("platform.index")}}" class="button mt-1">Все платформы</a>
 @if ($viewPlatform != -1)
 <div class="main_text big mt-1">Категории</div>
 <div class="platforms flex">
@@ -54,12 +59,12 @@
 </div>
 @endif
 <div class="products">
-    <div class="main_text middle">
+    <div class="main_text big">
         Фильтры
     </div>
     <div class="filters flex">
         <div class="filter_col flex">
-            <div class="secondary_text">
+            <div class="secondary_text small">
                 Минимальная цена
             </div>
             <div class="input">
@@ -67,7 +72,7 @@
             </div>
         </div>
         <div class="filter_col flex">
-            <div class="secondary_text">
+            <div class="secondary_text small">
                 Макс цена
             </div>
             <div class="input">
@@ -99,7 +104,7 @@
                             </div>
                         </div>
                         <div class="product-platform flex">
-                            <img src="{{ asset('images/' . $platform->img) }}" alt=""> 
+                            <img src="{{ asset('images/' . $pl->img) }}" alt=""> 
                             <div class="secondary_text">{{$pl->title}}</div>
                             <div class="secondary_text">/</div>
                             <div class="secondary_text">{{$ct->name}}</div>

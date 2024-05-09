@@ -136,6 +136,30 @@ $('#edit-user-submit').click(function() {
   });
 });
 
+$('.delete-params-submit').click(function() {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'param_id': $(this).attr("attr-param-id")
+  } 
+  console.log(data)
+  $.ajax({
+    url: '/admin/deleteParam', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      CreateNotify(response);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+});
+
 $('#add-params-submit').click(function() {
   $.ajaxSetup({
     headers: {
@@ -149,17 +173,74 @@ $('#add-params-submit').click(function() {
     'category_id': $(this).attr("attr-category-id")
   } 
   $.ajax({
-    url: '/admin/addParams', 
+    url: '/admin/addParam', 
     type: 'POST',
     data: data,
     success: function(response) {
-      console.log(response);
+      CreateNotify(response);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log(textStatus, errorThrown);
       alert('Ошибка при отправке данных на сервер!');
     }
   });
+});
+
+
+$('#add-category-submit').click(function() {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'name': $("#add-category-name").val(),
+    'platform_id': $("#add-category-platform_id").attr("attr-select")
+  } 
+  $.ajax({
+    url: '/admin/addCategory', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      CreateNotify(response);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+});
+
+$('#add-platform-submit').click(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'title': $("#add-platform-title").val(),
+    'img': $("#add-platform-img").val()
+  } 
+  $.ajax({
+    url: '/admin/addPlatform', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      CreateNotify(response);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+});
+
+$('.open-modal-add-platform').click(function() {
+  $('#modal-add-platform').parent().fadeIn();
+});
+
+$('.open-modal-add-category').click(function() {
+  $('#modal-add-category').parent().fadeIn();
 });
 
 $('.open-modal-add-params').click(function() {
@@ -177,7 +258,6 @@ $('.open-modal-edit-user').click(function() {
 
   $("#edit-user-login").val(user_login);
   $("#edit-user-balance").val(balance);
-  alert(balance)
   $("#edit-user-status").val(status);
   $("#edit-user-submit").attr("attr-user-id", user_id);
   $('#modal-edit-user').parent().fadeIn();
