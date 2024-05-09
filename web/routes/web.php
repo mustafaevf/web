@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Platform;
 
+use App\Http\Controllers\Auth;
+
 Route::prefix('admin')->group( function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', Admin\Category\IndexController::class)->name('admin.category.index');
@@ -40,6 +42,20 @@ Route::prefix('platforms')->group(function() {
     Route::get('/', Platform\IndexController::class)->name('platform.index');
     Route::get('/{platform}', Platform\ShowController::class)->name('platform.show');
 });
+
+Route::prefix('auth')->group(function() {
+    Route::prefix('register')->group(function () {
+        Route::get('/', Auth\Register\IndexController::class)->name('auth.register.index');
+        Route::post('/store', Auth\Register\StoreController::class)->name('auth.register.store');
+    });
+    Route::get('/register', function () {
+        return view('auth.register');
+    });
+    Route::post('/login', Auth\Login\StoreController::class)->name('auth.login');
+    // Route::post('/register', Auth\Register\IndexController::class)->name('auth.register');
+});
+
+
 // Route::group(function () {
 //     Route::get('/', IndexController::class);
 // });

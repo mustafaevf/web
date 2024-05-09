@@ -90,20 +90,20 @@
     <div class="modal-wrapper" style="display: none">
         <div class="modal" id="modal-auth">
             <div class="modal-header">
-                <div class="main_text middle">Авторизация</div>
+                <div class="main_text big">Авторизация</div>
                 <img src="{{asset('images/close.svg')}}" class="close" alt="">
             </div>
             <div class="modal-body">
                 <div class="form_col" style="margin-top: .5rem;">
-                    <div class="secondary_text">Имя пользователя</div>
+                    <div class="secondary_text middle">Имя пользователя</div>
                     <div class="input">
                         <input type="text" min-length="0" max-length="20" id="auth-login" placeholder="Имя пользователя">
                     </div>
                 </div>
                 <div class="form_col">
-                    <div class="secondary_text">Пароль</div>
+                    <div class="secondary_text middle">Пароль</div>
                     <div class="input">
-                        <input type="password" min-length="0" max-length="100" id="auth-password" placeholder="Пароль">
+                        <input type="password" min-length="0" max-length="100" id="auth-password" autocomplete="off" placeholder="Пароль">
                     </div>
                 </div>
                 <div class="form_col">

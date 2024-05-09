@@ -3,7 +3,7 @@ function href(link) {
 }
 
 $('#auth-login-submit').click(function() {
-  const username = $('#auth-login').val();
+  const login = $('#auth-login').val();
   const password = $('#auth-password').val();
 
   $.ajaxSetup({
@@ -12,10 +12,10 @@ $('#auth-login-submit').click(function() {
       }
   });
   $.ajax({
-    url: '/login', 
+    url: '/auth/login', 
     type: 'POST',
     data: {
-      username: username,
+      login: login,
       password: password
     },
     success: function(response) {
@@ -34,13 +34,13 @@ $('#auth-login-submit').click(function() {
     
 
 function register() {
-    const username = $('#auth-login').val();
+    const login = $('#auth-login').val();
     const email = $('#auth-email').val();
     const password = $('#auth-password').val();
     const rePassword = $('#auth-re-password').val();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const data = {
-      'username': username,
+      'login': login,
       'password': password,
       'email': email,
       'repassword': rePassword
@@ -264,7 +264,7 @@ $('.open-modal-edit-user').click(function() {
 });
 
 $('#open-modal-auth').click(function() {
-  $('#modal-auth').parent().fadeIn();
+  $('#modal-auth').parent().fadeIn().slideDown();
 });
 
 $('#open-modal-buy').click(function () {

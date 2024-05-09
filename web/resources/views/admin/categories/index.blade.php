@@ -4,13 +4,10 @@
 <div class="main_text big mt-1">Категории</div>
 <span><a href="{{route('admin.category.create')}}">Добавить</a></span>
 {{-- class="open-modal-add-category" --}}
-@php
-    $categories = App\Models\Category::get();
-@endphp
 <div class="products_">
     @foreach ($categories as $category)
         @php
-            $platform = App\Models\Platform::where('id',$category->platform_id)->first();
+            $platform = $category->platform;
             $parametrs = App\Models\Param::where('category_id', $category->id)->where('platform_id', $category->platform_id)->get();
         @endphp
         <div class=" platform box flex box flex">

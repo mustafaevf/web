@@ -52,7 +52,7 @@ a, a:hover {
 .box {
     background: var(--color-bg-main);
     border: 1px solid var(--color-border);
-    border-radius: 10px;
+    border-radius: 1rem;
     transition: .3s;
 }
 .box.active {
@@ -130,7 +130,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .sidebar-link:hover {
     background: var(--color-border);
-    transition: .3s;
+    transition: .3s;    
 }
 .sidebar-link a {
     color: var(--color-text-main);
@@ -140,9 +140,9 @@ input {
     outline: none;
     background: var(--color-bg-secondary);
     border: 1px solid var(--color-border);
-    border-radius: 10px;
+    border-radius: 1rem;
     color: var(--color-text-secondary);
-    padding: 1rem;
+    padding: .9rem 1.1rem;
     width: 100%;
     font-size: .9rem;
 }
@@ -151,7 +151,7 @@ textarea {
     outline: none;
     background: var(--color-bg-secondary);
     border: 1px solid var(--color-border);
-    border-radius: 10px;
+    border-radius: 1rem;
     color: var(--color-text-secondary);
     padding: .6rem;
     width: 100%;
@@ -178,9 +178,11 @@ a.btn-black {
 }
 button {
     outline: none;
-    border-radius: 10px;
+    border-radius: 1rem;
     border: none;
-    padding: .6rem 1rem ;
+    padding: .9rem 1.1rem;
+    /* padding-left: 2.3rem;
+    padding-right: 2.3rem; */
     color: var(--color-text-main);
     background: var(--color-primary);
     cursor: pointer;
@@ -250,8 +252,8 @@ input:-webkit-autofill {
     margin-top: .8rem;
 }
 .big {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.6  rem;
+    font-weight: 700;
     letter-spacing: .1rem;
 }
 .middle {

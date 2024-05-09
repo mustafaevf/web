@@ -12,4 +12,12 @@ class User extends Model implements AuthenticatableContract
 {
     use Authenticatable;
     use HasFactory;
+
+    protected $fillable = [
+        'login',
+        'password',
+        'avatar',
+        'email',
+        'balance'
+    ];
 }
