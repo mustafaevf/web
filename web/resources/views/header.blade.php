@@ -12,22 +12,20 @@
 <body>
     <div class="wrapper flex">
         <div class="sidebar flex">
-            @if (Auth::user())
-                @php
-                    $user = Auth::user();
-                @endphp
-                <div class="sidebar_header flex">
-                    <img src="{{asset('/images/'.$user->avatar)}}" class="avatar">
-                    <div class="info flex">
-                        <div class="main_text">{{$user->login}}</div>
-                        <div class="secondary_text">{{FormateMoney($user->balance)}}</div>
-                    </div>
-                </div>
-            @else
-                <div class="sidebar_header flex">
-                    <button id="open-modal-auth">Войти</button>
-                </div>
-            @endif
+            <div class="sidebar_header flex">
+                {{-- @if (Auth::user())
+                    @php
+                        $user = Auth::user();
+                    @endphp
+                    
+                        <img src="{{asset('/images/'.$user->avatar)}}" class="avatar">
+                        <div class="info flex">
+                            <div class="main_text middle">{{$user->login}}</div>
+                            <div class="secondary_text small">{{FormateMoney($user->balance)}}</div>
+                        </div>
+                    
+                @endif --}}
+            </div>
             
             <div class="sidebar_menu">
                
@@ -46,11 +44,10 @@
                 </div>
                 
                 @if (Auth::user())
+                    @php
+                        $user = Auth::user();
+                    @endphp
                     <div class="line"></div>
-                    <div class="sidebar-link flex">
-                        <img src="{{asset('images/sell.svg')}}" alt="">
-                        <a href="/logout">Выйти</a>
-                    </div>
                     @if ($user->status == 2)
                         <div class="line"></div>
                         <div class="sidebar-link flex">
@@ -119,6 +116,18 @@
             </div>
         </div>
     </div>
+    @if (Auth::user())
+    <div class="context" id="context-user">
+        <div class="context-inner">
+            <li><a href="{{route('user.show', $user->login)}}"><div class="secondary_text small">Мой профиль</div></a></li>
+            <li><a href="{{route('payment.pay')}}"><div class="secondary_text small">Пополнение</div></a></li>
+            <li><a href="{{route('payment.withdraw')}}"><div class="secondary_text small">Вывод</div></a></li>
+            <li><a href="{{route('auth.logout.store')}}"><div class="secondary_text small danger">Выйти</div></a></li>
+        </div>
+    </div>
+    @endif
+    
+    
     <script src="{{asset('js/script.js')}}"></script>
     <script src="{{asset('js/validate.js')}}"></script>
     <script src="{{asset('js/select.js')}}"></script>

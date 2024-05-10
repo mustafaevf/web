@@ -2,9 +2,30 @@
 @section('main')
 
 
-<div class="input">
-    <input type="text" placeholder="Введите название товара, категории или платформы">
+<div class="sidebar-top flex">
+    <div class="input">
+        <input type="text" placeholder="Введите название товара, категории или платформы">
+    </div>
+    
+        @if (Auth::user())
+            @php
+                $user = Auth::user();
+            @endphp
+                @include('shared.user-top', $user)
+                {{-- <div class="user-top-avatar box flex" id="open-context-user">
+                    <img src="{{asset('/images/'.$user->avatar)}}" class="avatar">
+                    <div class="info flex"> --}}
+                        {{-- <div class="main_text middle">{{$user->login}}</div> --}}
+                        {{-- <div class="secondary_text small">{{FormateMoney($user->balance)}}</div>
+                    </div>
+                    <img src="{{asset('images/expand_down.svg')}}" style="width: 22px" alt="">
+                </div> --}}
+        @else
+            <button id="open-modal-auth">Войти</button>
+        @endif
+    
 </div>
+
 
 <div class="main_text big mt-1 flex">Платформы</div>
     
@@ -39,10 +60,14 @@
             </a>
         @endif
         
-        
+       
     @endforeach
+    <a href="{{route('platform.index')}}">
+        <div class="platform box flex">
+            <div class="main_text middle">Еще</div>
+        </div>
+    </a>
 </div>
-<a href="{{route("platform.index")}}" class="button mt-1">Все платформы</a>
 @if ($viewPlatform != -1)
 <div class="main_text big mt-1">Категории</div>
 <div class="platforms flex">
@@ -120,7 +145,6 @@
         @endforeach
     </div>
 </div>
-
 
 
 @stop

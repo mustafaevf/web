@@ -235,6 +235,16 @@ $('#add-platform-submit').click(function () {
   });
 });
 
+$('#open-context-user').click(function() {
+  if($('#context-user').css('display') == "block") {
+    $(this).find('img').last().attr("src", "/images/expand_down.svg");
+    $('#context-user').slideUp();
+  } else {
+    $(this).find('img').last().attr("src", "/images/expand_up.svg");
+    $('#context-user').slideDown();
+  }
+});
+
 $('.open-modal-add-platform').click(function() {
   $('#modal-add-platform').parent().fadeIn();
 });
@@ -274,7 +284,7 @@ $('#open-modal-buy').click(function () {
 $('.close').click(function() {
   if($(this).parent().parent().parent().attr("class") == "modal-wrapper") {
     $(this).parent().parent().parent().fadeOut();
-  }
+  } 
 })
 
 

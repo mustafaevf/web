@@ -1,27 +1,14 @@
 <?php
 
-// use App\Http\Controllers\Admin\AdminController;
-// use App\Http\Controllers\ApiController;
-// use App\Http\Controllers\Auth\LoginController;
-// use App\Http\Controllers\Auth\LogoutController;
-// use App\Http\Controllers\Auth\RegisterController;
-// use App\Http\Controllers\Message\MessageController;
-// use App\Http\Controllers\Product\ProductController;
-// use App\Http\Controllers\User\UserController;
-// use App\Http\Controllers\IndexController;
-// use App\Http\Controllers\Admin;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
-
-// use App\Http\Controllers\Admin\Category;
-
 use App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Platform;
-
 use App\Http\Controllers\Auth;
+use App\Http\Controllers\User;
+use App\Http\Controllers\Payment;
 
-Route::prefix('admin')->group( function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->group( function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', Admin\Category\IndexController::class)->name('admin.category.index');
         Route::get('/create', Admin\Category\CreateController::class)->name('admin.category.create');
@@ -48,12 +35,21 @@ Route::prefix('auth')->group(function() {
         Route::get('/', Auth\Register\IndexController::class)->name('auth.register.index');
         Route::post('/store', Auth\Register\StoreController::class)->name('auth.register.store');
     });
-    Route::get('/register', function () {
-        return view('auth.register');
-    });
-    Route::post('/login', Auth\Login\StoreController::class)->name('auth.login');
+    Route::post('/login', Auth\Login\StoreController::class)->name('auth.login.store');
+    Route::get('/logout', Auth\Logout\StoreController::class)->name('auth.logout.store');
     // Route::post('/register', Auth\Register\IndexController::class)->name('auth.register');
 });
+
+
+Route::prefix('user')->middleware('auth')->group(function () {
+    Route::get('/{user}', User\ShowController::class)->name('user.show');
+});
+
+Route::middleware('auth')->group(function() {
+    Route::get('/pay', Payment\Pay\IndexController::class)->name('payment.pay');
+    Route::get('/withdraw', Payment\Withdraw\IndexController::class)->name('payment.withdraw');    
+});
+
 
 
 // Route::group(function () {
@@ -92,7 +88,6 @@ Route::get('/', IndexController::class)->name('index');
 //         return view('error', ['message' => 'Log in']);
 //     }
 // });
-
 // Route::get('/platforms/{platform_title?}', function (?string $platform_title = null) {
 //     return view('platforms', ['platform_title' => $platform_title]);
 // });
@@ -133,4 +128,5 @@ Route::get('/', IndexController::class)->name('index');
 // Route::post("addProduct", [ProductController::class, "Add"]);
 
 // Route::get('/api/getCategories', [ApiController::class, 'getCategories']);
+
 // Route::get('/api/getParams', [ApiController::class, 'getCategories']);

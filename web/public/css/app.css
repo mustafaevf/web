@@ -78,7 +78,7 @@ li {
 
 .sidebar_header {
     border-bottom: 1px solid var(--color-border);
-    padding: 1.5rem 1rem;
+    padding: .9rem 1rem;
     gap: 1rem;
     align-items: center;
 }
@@ -97,7 +97,7 @@ li {
 }
 .info {
     flex-direction: column;
-    gap: .3rem;
+    /* gap: .3rem; */
 }
 img.avatar {
     width: 50px;
@@ -266,6 +266,7 @@ input:-webkit-autofill {
 .platforms {
    margin-top: .8rem;
    gap: .7rem;
+   flex-wrap: wrap;
 }
 .platform {
     cursor: pointer;
@@ -525,6 +526,65 @@ table tbody tr:nth-child(odd){
 table tbody tr:nth-child(even){
 	background: var(--color-bg-main);
 }
+.sidebar-top {
+    align-items: center;
+    gap: 2rem;
+}
+.sidebar-top button {
+    width: 150px;
+}
+.user-top-balance {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    padding: .3rem;
+}
+.user-top-avatar {
+    cursor: pointer;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    gap: .9rem;
+    border-radius: 1rem;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
+    padding-left: .6rem;
+    align-items: center;
+    padding-right: .6rem;
+    min-width: 180px;
+}
+.user-top-avatar img {
+    width: 40px;
+    height: 40px;
+}
+.context {
+    display: none;
+    position: absolute;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: .8rem;
+    width: 180px;
+    right: 2rem;
+    top: 5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.context-inner {
+    margin-top: .4rem;
+    margin-bottom: .4rem;
+    display: flex;
+    flex-direction: column;
+}
+.context-inner li {
+    list-style: none;
+    padding: .5rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    transition: .3s;
+}
+.context-inner li:last-child {
+    border-bottom: none;
+}
+.context-inner li:hover {
+    background: var(--color-border);
+    transition: .3s;
+}
 @media (max-width: 1000px) {
     .sidebar {
         display: none;
@@ -546,5 +606,8 @@ table tbody tr:nth-child(even){
     }
     .modal-wrapper {
         padding: 1rem;
+    }
+    .filters {
+        flex-direction: column;
     }
 }

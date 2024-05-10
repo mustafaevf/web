@@ -1,8 +1,10 @@
 @extends('header')
 @section('main')
 
+
+{{-- {{dd($user->lio)}} --}}
 <div class="user-title">
-    <img src="{{asset('images/'. $user->avatar)}}" alt="">
+    {{-- <img src="{{asset('images/'. $user->avatar)}}" alt=""> --}}
 
     <div class="user-title-col">
         <div class="user-login">
@@ -30,6 +32,9 @@
             <a href="/users/{{$user->login}}/reviews">Отзывы</a>
         </div>
         <div class="lst">
+            @php
+                $products = '';
+            @endphp
             @if ($products != '')
                 @foreach ($products as $product)
                     <p>{{$product->title}}</p>
