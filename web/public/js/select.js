@@ -11,10 +11,13 @@ $('.select-main').click(function() {
 $('.select-option').click(function () {
     if($(this).parent().css("display") != "none") {
         value = $(this).attr("value");
+        if($(this).parent().parent().attr('id') == 'add-category-platform_id') {
+            $('input[name="platform_id"]').val(value);
+        }
         $(this).parent().parent().attr("attr-select", value);
         $(this).parent().slideUp(500);
         $(this).parent().parent().find(".select-main").find(".secondary_text").text($(this).text().trim())
-        $(this).parent().parent().find('img').attr("src", "/images/expand_down.svg");
+        $(this).parent().parent().find('img').first().attr("src", "/images/expand_down.svg");
     }
 });
 

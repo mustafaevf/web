@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'name',
+        'platform_id'
+    ];
+    
     public function platform() {
         return $this->belongsTo('App\Models\Platform');
     }

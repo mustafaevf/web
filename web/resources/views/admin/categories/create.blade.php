@@ -9,7 +9,7 @@
     <div class="form_col" style="margin-top: .5rem;">
         <div class="secondary_text">Название категории</div>
         <div class="input">
-            <input type="text" min-length="0" max-length="50" id="add-category-name" autocomplete="address-level4" placeholder="Название">
+            <input type="text" min-length="0" max-length="50" name="name" autocomplete="address-level4" placeholder="Название">
         </div>
         <div class="secondary_text small danger" style="display: none;">Ошибка</div>
     </div>
@@ -23,18 +23,19 @@
             <div class="select-options" style="display: none">
                 @php
                     $platforms = App\Models\Platform::get();
-                @endphp
+                    @endphp
                 @foreach ($platforms as $platform)
-                    <div class="select-option" value="{{$platform->id}}"> 
-                        <img src="{{asset('images/'. $platform->img)}}" alt="">{{$platform->title}}
-                    </div>
+                <div class="select-option" value="{{$platform->id}}"> 
+                    <img src="{{asset('images/'. $platform->img)}}" alt="">{{$platform->title}}
+                </div>
                 @endforeach
-               
+                
             </div>
         </div>
+        <input type="hidden" name="platform_id" value="fdsdf">
     </div>
     <div class="form_col">
-        <button>Добавить</button>
+        <button type="submit">Добавить</button>
     </div>
 </form>
 
