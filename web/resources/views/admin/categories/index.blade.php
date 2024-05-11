@@ -2,66 +2,39 @@
 @section('main')
 
 <div class="main_text big mt-1">Категории</div>
-<span><a href="{{route('admin.category.create')}}">Добавить</a></span>
+<a href="{{route('admin.category.create')}}"><img src="{{asset('images/add.svg')}}" style="width: 20px; height: 20px; cursor: pointer;"></img></span>
 {{-- class="open-modal-add-category" --}}
+@php
+$platforms = App\Models\Platform::where('status', 1)->get();
+@endphp
+<div class="platforms flex">
+    <a href="{{route('admin.category.index')}}">
+        <div class="platform box flex">
+            <div class="main_text middle">Все</div>
+        </div>
+    </a>
+
+@foreach($platforms as $platform)
+    <a href="{{route('admin.category.index')}}?platform_id={{$platform->id}}">
+        <div class="platform box flex">
+            <img src="{{ asset('images/' . $platform->img) }}" alt="">
+            <div class="main_text middle">{{$platform->title}}</div>
+        </div>
+    </a>
+
+
+@endforeach
+</div>
 <div class="products_">
     @foreach ($categories as $category)
         @php
             $platform = $category->platform;
-            $parametrs = App\Models\Param::where('category_id', $category->id)->where('platform_id', $category->platform_id)->get();
         @endphp
-        <div class=" platform box flex box flex">
-            <div class="dropdown">
-                <div class="dropdown-main">
-                    <a href="{{route('admin.category.show', $category->id)}}"><div class="secondary_text" style="display: flex; align-items: center; gap: .5rem;"><img src="{{ asset('images/' . $platform->img) }}" alt="">{{$category->name}}</div></a>
-                    <img src="{{asset('images/expand_down.svg')}}" alt="">
-                </div>
-                <div class="dropdown-options mt-1" style="display: none">
-                    <div class="main_text big mt-1">Параметры</div>
-                    @if ($parametrs->count() == 0)
-                        <div class="secondary_text mt-1" >Параметров нет</div>
-                    @else
-                        @foreach ($parametrs as $param)
-                            <div class="form_col">
-                                <div class="secondary_text">{{$param->title}} <span class="delete-params-submit" attr-param-id={{$param->id}}>Удалить</span></div>
-                                @if ($param->type == "choose_btn")
-                                    @php
-                                        $args = explode('|', $param->attr);
-                                    @endphp
-                                    <div class="choose_block flex">
-                                        @for ($i = 0; $i < count($args) - 1; $i++)
-                                            <div class="choose_btn box active">{{$args[$i]}}</div>
-                                            <div class="choose_btn box">{{$args[$i + 1]}}</div>
-                                        @endfor
-                                    </div>
-                                @endif
-                                @if ($param->type == "input")
-                                @php
-                                    $args = explode('|', $param->attr);
-                                    $min = explode('=', $args[1])[1];
-                                    $max = explode('=', $args[2])[1];
-                                    if(count($args) == 4) {
-                                        $placeholder = explode('=', $args[3])[1];
-                                    } else {
-                                        $placeholder = $param->title;
-                                    }
-                                @endphp
-                                    @if ($args[0] == "number")
-                                        <div class="input"><input type="number" min-number={{$min}} max-number={{$max}} placeholder={{$placeholder}}></div>
-                                    @else
-                                        <div class="input"><input type="text" min-length={{$min}} max-length={{$max}} placeholder={{$placeholder}}></div>
-                                    @endif
-                                    
-                                    <div class="secondary_text small danger" style="display: none;">Ошибка</div>
-                                @endif
-                            </div>
-                           
-                        @endforeach
-                    @endif
-                    <button class="mt-1 open-modal-add-params" attr-category-id={{$category->id}}>Добавить</button>
-                </div>
-            </div>
-            
+        <div class="platform box flex box flex">
+            <img src="{{asset('images/'.$platform->img)}}" alt="">
+            <div class="secondary_text">{{$category->name}}</div>
+            <img src="{{asset('images/trash.svg')}}" class="delete-category-submit" alt="" attr-category-id={{$category->id}} style="width: 20px; height: 20px; cursor: pointer;">
+            <a href="{{route('admin.category.show', $category->id)}}"><img src="{{asset('images/pen.svg')}}" style="width: 20px; height: 20px; cursor: pointer;"></a>
         </div>
     @endforeach
 </div>

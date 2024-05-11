@@ -309,6 +309,9 @@ input:-webkit-autofill {
 }
 .products_ {
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
 }
 .product {
     padding: .6rem 1.5rem;

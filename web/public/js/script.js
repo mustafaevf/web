@@ -136,6 +136,30 @@ $('#edit-user-submit').click(function() {
   });
 });
 
+$('.delete-category-submit').click(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'category_id': $(this).attr("attr-category-id")
+  } 
+  console.log(data)
+  $.ajax({
+    url: '/admin/categories/' + data['category_id'], 
+    type: 'DELETE',
+    data: data,
+    success: function(response) {
+      CreateNotify(response);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+});
+
 $('.delete-params-submit').click(function() {
   $.ajaxSetup({
     headers: {

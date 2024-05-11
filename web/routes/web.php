@@ -14,6 +14,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group( function () {
         Route::get('/create', Admin\Category\CreateController::class)->name('admin.category.create');
         Route::post('/store', Admin\Category\StoreController::class)->name('admin.category.store');
         Route::get('/{category}', Admin\Category\ShowController::class)->name('admin.category.show');
+        Route::delete('/{category_id}', Admin\Category\DeleteController::class)->name('admin.category.delete');
     });
 
     Route::prefix('params')->group(function () {

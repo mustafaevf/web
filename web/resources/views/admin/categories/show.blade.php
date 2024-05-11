@@ -4,12 +4,12 @@
 <div class="secondary_text"><a href="{{route('admin.category.index')}}">Назад</a></div>
 <div class="main_text big mt-1">Категория</div>
 
-<div class="main_text middle mt-1" style="display: flex; align-items: center; gap: 1rem;"><img src="{{asset('images/'. $category->platform->img)}}" alt="" style="width: 30px; height: 30px;">{{$category->name}}<div class="secondary_text">Удалить</div></div>
+<div class="main_text middle mt-1" style="display: flex; align-items: center; gap: 1rem;"><img src="{{asset('images/'. $category->platform->img)}}" alt="" style="width: 30px; height: 30px;">{{$category->name}}<img src="{{asset('images/trash.svg')}}" class="delete-category-submit" alt="" attr-category-id={{$category->id}} style="width: 20px; height: 20px; cursor: pointer;"></div>
 
 @if ($category->params->count() != 0)
     @foreach ($category->params as $param)
         <div class="form_col">
-            <div class="secondary_text">{{$param->title}} <span class="delete-params-submit" attr-param-id={{$param->id}}>Удалить</span></div>
+            <div class="secondary_text">{{$param->title}} <img src="{{asset('images/trash.svg')}}" class="delete-params-submit" attr-param-id={{$param->id}} style="width: 20px; height: 20px; cursor: pointer;"></div>
             @if ($param->type == "choose_btn")
                 @php
                     $args = explode('|', $param->attr);
