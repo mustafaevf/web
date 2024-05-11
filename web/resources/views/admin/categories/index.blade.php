@@ -65,53 +65,7 @@
         </div>
     @endforeach
 </div>
-<div class="modal-wrapper" style="display: none">
-    <div class="modal" id="modal-add-params">
-        <div class="modal-header">
-            <div class="main_text middle">Добавление дополнительных параметров</div>
-            <img src="{{asset('images/close.svg')}}" class="close" alt="">
-        </div>
-        <div class="modal-body">
-            <div class="form_col" style="margin-top: .5rem;">
-                <div class="secondary_text">Заголовок</div>
-                <div class="input">
-                    <input type="text" min-length="0" max-length="50" id="add-params-title" autocomplete="address-level4" placeholder="Название">
-                </div>
-                <div class="secondary_text small danger" style="display: none;">Ошибка</div>
-            </div>
-            <div class="form_col" style="margin-top: .5rem;">
-                <div class="secondary_text">Тип</div>
-                <div class="select" id="add-params-type" attr-select="null">
-                    <div class="select-main">
-                        <div class="secondary_text">Выберите тип</div>
-                        <img src="{{asset('images/expand_down.svg')}}" alt="">
-                    </div>
-                    <div class="select-options" style="display: none">
-                        <div class="select-option" value="input"> 
-                            Ввод
-                        </div>
-                        <div class="select-option" value="select">
-                            Список
-                        </div>
-                        <div class="select-option" value="choose_btn">
-                            Переключатели
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form_col" style="margin-top: .5rem;">
-                <div class="secondary_text">Доп параметры</div>
-                <div class="input">
-                    <input type="text" id="add-params-attr"  placeholder="Дополнительные параметры">
-                </div>
-                <div class="secondary_text small danger" style="display: none;">Ошибка</div>
-            </div>
-            <div class="form_col">
-                <button id="add-params-submit" attr-category-id=0>Сохранить</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="modal-wrapper" style="display: none">
     <div class="modal" id="modal-add-category">
         <div class="modal-header">

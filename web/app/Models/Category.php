@@ -16,4 +16,8 @@ class Category extends Model
     public function platform() {
         return $this->belongsTo('App\Models\Platform');
     }
+
+    public function params() {
+        return $this->hasMany('App\Models\Param');
+    }
 }

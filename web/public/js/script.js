@@ -147,13 +147,14 @@ $('.delete-params-submit').click(function() {
   } 
   console.log(data)
   $.ajax({
-    url: '/admin/deleteParam', 
-    type: 'POST',
+    url: '/admin/params/' + data['param_id'], 
+    type: 'DELETE',
     data: data,
     success: function(response) {
       CreateNotify(response);
     },
     error: function(jqXHR, textStatus, errorThrown) {
+      console.log('/admin/params/' + data['param_id'])
       console.log(textStatus, errorThrown);
       alert('Ошибка при отправке данных на сервер!');
     }
@@ -173,13 +174,14 @@ $('#add-params-submit').click(function() {
     'category_id': $(this).attr("attr-category-id")
   } 
   $.ajax({
-    url: '/admin/addParam', 
+    url: '/admin/params/store', 
     type: 'POST',
     data: data,
     success: function(response) {
       CreateNotify(response);
     },
     error: function(jqXHR, textStatus, errorThrown) {
+      console.log(data);
       console.log(textStatus, errorThrown);
       alert('Ошибка при отправке данных на сервер!');
     }

@@ -16,6 +16,11 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group( function () {
         Route::get('/{category}', Admin\Category\ShowController::class)->name('admin.category.show');
     });
 
+    Route::prefix('params')->group(function () {
+        Route::delete('/{param_id}', Admin\Param\DeleteController::class)->name('admin.param.delete');
+        Route::post('/store', Admin\Param\StoreController::class)->name('admin.param.create');
+    });
+
     Route::prefix('platforms')->group(function() {
         Route::get('/', Admin\Platform\IndexController::class)->name('admin.platform.index');
         Route::get('/create', Admin\Platform\CreateController::class)->name('admin.platform.create');
