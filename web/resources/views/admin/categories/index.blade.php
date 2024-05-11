@@ -17,7 +17,7 @@ $platforms = App\Models\Platform::where('status', 1)->get();
 @foreach($platforms as $platform)
     <a href="{{route('admin.category.index')}}?platform_id={{$platform->id}}">
         <div class="platform box flex">
-            <img src="{{ asset('images/' . $platform->img) }}" alt="">
+            <img src="{{ asset($platform->img) }}" alt="">
             <div class="main_text middle">{{$platform->title}}</div>
         </div>
     </a>
