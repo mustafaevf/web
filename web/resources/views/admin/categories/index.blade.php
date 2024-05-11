@@ -31,7 +31,7 @@ $platforms = App\Models\Platform::where('status', 1)->get();
             $platform = $category->platform;
         @endphp
         <div class="platform box flex box flex">
-            <img src="{{asset('images/'.$platform->img)}}" alt="">
+            <img src="{{asset($platform->img)}}" alt="">
             <div class="secondary_text">{{$category->name}}</div>
             <img src="{{asset('images/trash.svg')}}" class="delete-category-submit" alt="" attr-category-id={{$category->id}} style="width: 20px; height: 20px; cursor: pointer;">
             <a href="{{route('admin.category.show', $category->id)}}"><img src="{{asset('images/pen.svg')}}" style="width: 20px; height: 20px; cursor: pointer;"></a>

@@ -26,7 +26,7 @@
                     @endphp
                 @foreach ($platforms as $platform)
                 <div class="select-option" value="{{$platform->id}}"> 
-                    <img src="{{asset('images/'. $platform->img)}}" alt="">{{$platform->title}}
+                    <img src="{{asset($platform->img)}}" alt="">{{$platform->title}}
                 </div>
                 @endforeach
                 

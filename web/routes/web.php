@@ -15,6 +15,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group( function () {
         Route::post('/store', Admin\Category\StoreController::class)->name('admin.category.store');
         Route::get('/{category}', Admin\Category\ShowController::class)->name('admin.category.show');
         Route::delete('/{category_id}', Admin\Category\DeleteController::class)->name('admin.category.delete');
+        Route::put('/{category_id}', Admin\Category\UpdateController::class)->name('admin.category.update');
     });
 
     Route::prefix('params')->group(function () {
@@ -28,6 +29,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group( function () {
         Route::post('/store', Admin\Platform\StoreController::class)->name('admin.platform.store');
         Route::get('/{platform}', Admin\Platform\ShowController::class)->name('admin.platform.show');
         Route::delete('/{platform_id}', Admin\Platform\DeleteController::class)->name('admin.platform.delete');
+        Route::put('/{platform_id}', Admin\Platform\UpdateController::class)->name('admin.platform.update');
     });
 });
 

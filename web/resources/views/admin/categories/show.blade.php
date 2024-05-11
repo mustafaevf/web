@@ -4,8 +4,27 @@
 <div class="secondary_text"><a href="{{route('admin.category.index')}}">Назад</a></div>
 <div class="main_text big mt-1">Категория</div>
 
-<div class="main_text middle mt-1" style="display: flex; align-items: center; gap: 1rem;"><img src="{{asset('images/'. $category->platform->img)}}" alt="" style="width: 30px; height: 30px;">{{$category->name}}<img src="{{asset('images/trash.svg')}}" class="delete-category-submit" alt="" attr-category-id={{$category->id}} style="width: 20px; height: 20px; cursor: pointer;"></div>
+<div class="main_text middle mt-1" style="display: flex; align-items: center; gap: 1rem;"><img src="{{asset($category->platform->img)}}" alt="" style="width: 30px; height: 30px;">{{$category->name}}<img src="{{asset('images/trash.svg')}}" class="delete-category-submit" alt="" attr-category-id={{$category->id}} style="width: 20px; height: 20px; cursor: pointer;"></div>
 
+
+<form method="POST" action="{{route("admin.category.update", $category->id)}}">
+    @csrf
+    @method('PUT')
+    <div class="form_col" style="margin-top: .5rem;">
+        <div class="secondary_text">Название категории</div>
+        <div class="input">
+            <input type="text" min-length="0" max-length="50" name="name" autocomplete="address-level4" placeholder="Название" value="{{$category->name}}">
+        </div>
+        <div class="secondary_text small danger" style="display: none;">Ошибка</div>
+    </div>
+    <div class="form_col">
+        <button type="submit">Сохранить</button>
+    </div>
+</form>
+
+
+<div class="line mt-1"></div>
+<div class="main_text middle">Параметры</div>
 @if ($category->params->count() != 0)
     @foreach ($category->params as $param)
         <div class="form_col">
