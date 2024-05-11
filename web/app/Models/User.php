@@ -18,6 +18,7 @@ class User extends Model implements AuthenticatableContract
         'password',
         'avatar',
         'email',
+        'status',
         'balance'
     ];
 }

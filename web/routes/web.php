@@ -18,6 +18,12 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group( function () {
         Route::put('/{category_id}', Admin\Category\UpdateController::class)->name('admin.category.update');
     });
 
+    Route::prefix('users')->group(function() {
+        Route::get('/', Admin\User\IndexController::class)->name('admin.user.index');
+        Route::get('/{user}', Admin\User\ShowController::class)->name('admin.user.show');
+        Route::put('/{user_id}', Admin\User\UpdateController::class)->name('admin.user.update');
+    });
+
     Route::prefix('params')->group(function () {
         Route::delete('/{param_id}', Admin\Param\DeleteController::class)->name('admin.param.delete');
         Route::post('/store', Admin\Param\StoreController::class)->name('admin.param.create');
