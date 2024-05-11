@@ -39,14 +39,14 @@
             @if ($platform->id == $viewPlatform)
                 <a href="/platforms/{{strtolower($platform->title)}}">
                     <div class="platform box flex active">
-                        <img src="{{ asset('images/' . $platform->img) }}" alt="">
+                        <img src="{{ asset($platform->img) }}" alt="">
                         <div class="main_text middle">{{$platform->title}}</div>
                     </div>
                 </a>
             @else
             <a href="/platforms/{{strtolower($platform->title)}}">
                 <div class="platform box flex">
-                    <img src="{{ asset('images/' . $platform->img) }}" alt="">
+                    <img src="{{ asset($platform->img) }}" alt="">
                     <div class="main_text middle">{{$platform->title}}</div>
                 </div>
             </a>
@@ -54,7 +54,7 @@
         @else
             <a href="/platforms/{{strtolower($platform->title)}}">
                 <div class="platform box flex">
-                    <img src="{{ asset('images/' . $platform->img) }}" alt="">
+                    <img src="{{ asset($platform->img) }}" alt="">
                     <div class="main_text middle">{{$platform->title}}</div>
                 </div>
             </a>

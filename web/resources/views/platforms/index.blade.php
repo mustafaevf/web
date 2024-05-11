@@ -7,7 +7,7 @@
     @foreach($platforms as $platform)
         <a href="/platforms/{{strtolower($platform->title)}}">
             <div class="platform box flex">
-                <img src="{{ asset('images/' . $platform->img) }}" alt="">
+                <img src="{{ asset($platform->img) }}" alt="">
                 <div class="main_text middle">{{$platform->title}}</div>
             </div>
         </a>

@@ -27,6 +27,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group( function () {
         Route::get('/create', Admin\Platform\CreateController::class)->name('admin.platform.create');
         Route::post('/store', Admin\Platform\StoreController::class)->name('admin.platform.store');
         Route::get('/{platform}', Admin\Platform\ShowController::class)->name('admin.platform.show');
+        Route::delete('/{platform_id}', Admin\Platform\DeleteController::class)->name('admin.platform.delete');
     });
 });
 

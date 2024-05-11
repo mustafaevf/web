@@ -2,7 +2,7 @@
 @section('main')
 
 <div class="main_text big mt-1">Категории</div>
-<a href="{{route('admin.category.create')}}"><img src="{{asset('images/add.svg')}}" style="width: 20px; height: 20px; cursor: pointer;"></img></span>
+<a href="{{route('admin.category.create')}}"><img src="{{asset('images/add.svg')}}" style="width: 20px; height: 20px; cursor: pointer;"></img></a>
 {{-- class="open-modal-add-category" --}}
 @php
 $platforms = App\Models\Platform::where('status', 1)->get();

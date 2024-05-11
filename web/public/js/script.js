@@ -160,6 +160,30 @@ $('.delete-category-submit').click(function () {
   });
 });
 
+$('.delete-platform-submit').click(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'platform_id': $(this).attr("attr-platform-id")
+  } 
+  console.log(data)
+  $.ajax({
+    url: '/admin/platforms/' + data['platform_id'], 
+    type: 'DELETE',
+    data: data,
+    success: function(response) {
+      CreateNotify(response);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+});
+
 $('.delete-params-submit').click(function() {
   $.ajaxSetup({
     headers: {
