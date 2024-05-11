@@ -245,6 +245,9 @@ input:-webkit-autofill {
     border-bottom: 1px solid var(--color-border);
     padding: 1rem;
 }
+.select-option:last-child {
+    border: none;
+}
 .select-option img {
     width: 30px;
     height: 30px;
