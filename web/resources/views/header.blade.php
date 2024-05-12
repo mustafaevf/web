@@ -12,7 +12,7 @@
 <body>
     <div class="wrapper flex">
         <div class="sidebar flex">
-            <div class="sidebar_header flex">
+            {{-- <div class="sidebar_header flex"> --}}
                 {{-- @if (Auth::user())
                     @php
                         $user = Auth::user();
@@ -25,7 +25,7 @@
                         </div>
                     
                 @endif --}}
-            </div>
+            {{-- </div> --}}
             
             <div class="sidebar_menu">
                
@@ -47,9 +47,7 @@
                     @php
                         $user = Auth::user();
                     @endphp
-                    <div class="line"></div>
                     @if ($user->status == 2)
-                        <div class="line"></div>
                         <div class="sidebar-link flex">
                             <div class="dropdown">
                                 <div class="dropdown-main">
@@ -94,13 +92,13 @@
                 <div class="form_col" style="margin-top: .5rem;">
                     <div class="secondary_text middle">Имя пользователя</div>
                     <div class="input">
-                        <input type="text" min-length="0" max-length="20" id="auth-login" placeholder="Имя пользователя">
+                        <input type="text" min-length="0" max-length="20" name="auth-login" id="auth-login" placeholder="Имя пользователя">
                     </div>
                 </div>
                 <div class="form_col">
                     <div class="secondary_text middle">Пароль</div>
                     <div class="input">
-                        <input type="password" min-length="0" max-length="100" id="auth-password" autocomplete="off" placeholder="Пароль">
+                        <input type="password" min-length="0" max-length="100" name="auth-password" id="auth-password" autocomplete="off" placeholder="Пароль">
                     </div>
                 </div>
                 <div class="form_col">
@@ -108,10 +106,10 @@
                 </div>
                 <div class="line mt-1"></div>
                 <div class="form_col">
-                    <button class="btn-vk">Войти через Вконтакте</button>
+                    <a class="a-btn btn-vk"><img src="{{asset('images/vk.png')}}" alt="">Войти через Вконтакте</a>
                 </div>
                 <div class="form_col">
-                    <button class="btn-telegram">Войти через Телеграмм</button>
+                    <a class="a-btn btn-telegram">Войти через Телеграмм</a>
                 </div>
             </div>
         </div>
@@ -119,10 +117,10 @@
     @if (Auth::user())
     <div class="context" id="context-user">
         <div class="context-inner">
-            <li><a href="{{route('user.show', $user->login)}}"><div class="secondary_text small">Мой профиль</div></a></li>
-            <li><a href="{{route('payment.pay')}}"><div class="secondary_text small">Пополнение</div></a></li>
-            <li><a href="{{route('payment.withdraw')}}"><div class="secondary_text small">Вывод</div></a></li>
-            <li><a href="{{route('auth.logout.store')}}"><div class="secondary_text small danger">Выйти</div></a></li>
+            <li><a href="{{route('user.show', $user->login)}}"><div class="main_text small">Мой профиль</div></a></li>
+            <li><a href="{{route('payment.pay')}}"><div class="main_text small">Пополнение</div></a></li>
+            <li><a href="{{route('payment.withdraw')}}"><div class="main_text small">Вывод</div></a></li>
+            <li><a href="{{route('auth.logout.store')}}"><div class="main_text small danger">Выйти</div></a></li>
         </div>
     </div>
     @endif

@@ -84,27 +84,38 @@
 </div>
 @endif
 <div class="products">
-    <div class="main_text big">
-        Фильтры
+    <div class="products-left">
+        <div class="filter">
+            <div class="main_text middle">Цена</div>
+            <div class="form_inline mt-1">
+                <div class="input"><input type="text" name="filter['from']" placeholder="От" value=""></div>
+                <div class="input"><input type="number" name="filter['to']" autocomplete="name" placeholder="До" value=""></div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="filter">
+            <div class="main_text middle">Атрибуты</div>
+           
+        </div>
     </div>
-    <div class="filters flex">
-        <div class="filter_col flex">
-            <div class="secondary_text small">
-                Минимальная цена
-            </div>
-            <div class="input">
-                <input type="text">
-            </div>
-        </div>
-        <div class="filter_col flex">
-            <div class="secondary_text small">
-                Макс цена
-            </div>
-            <div class="input">
-                <input type="text">
+    <div class="products-right">
+        <div class="sort">
+            <div class="select" >
+                <div class="select-main flex" style="gap: .3rem;"><div class="main_text">Сортировать</div><img src="{{asset('images/expand_down.svg')}}" alt=""></div>
+                <div class="select-options" style="display: none">
+                    <div class="select-option" value=""> 
+                        По цене
+                    </div>
+                </div>
             </div>
         </div>
-    </div>  
+        <div class="small-line">
+
+        </div>
+        <div class="product-list">
+
+        </div>
+    </div>
     <div class="products_">
         @foreach($products as $product)
             @php

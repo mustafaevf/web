@@ -17,7 +17,7 @@
       @foreach ($users as $user)
       
             <tr>
-                <td style="display: flex; align-items: center; justify-content: center; gap: .7rem"><a href="{{route('admin.user.show', $user)}}"><img style="width: 30px; height: 30px; border-radius: 100%;" src="{{asset('images/'.$user->avatar)}}">{{$user->login}} </a></td>
+                <td style="display: flex; align-items: center; justify-content: center; gap: .7rem"><a href="{{route('admin.user.show', $user)}}"><div class="secondary_text"><img style="width: 30px; height: 30px; border-radius: 100%;" src="{{asset('images/'.$user->avatar)}}">{{$user->login}} </div></a></td>
                 <td>{{FormateMoney($user->balance)}}</td>
                 <td>{{$user->status}}</td>
                 <td>{{FormateDate($user->created_at)}}</td>
