@@ -1,8 +1,10 @@
 $('.select-main').click(function() {
-    parent = $(this).parent().parent()
+    parent = $(this).parent()
+    width = parent.css('width');
     if($(parent).find(".select-options").css("display") == "none") {
         $(this).find('img').attr("src", "/images/expand_up.svg");
         $(parent).find(".select-options").slideDown(500);
+        $(parent).find('.select-options').css('width', width);
     } else {
         $(this).find('img').attr("src", "/images/expand_down.svg");
         $(parent).find(".select-options").slideUp(500);
