@@ -20,7 +20,7 @@ class ShowController extends Controller
                     //         $products = '';
                     //     }
                     
-        return view('users/user', compact('user'));
+        return view('users.show', compact('user'));
         // } else {
         //     return view('error', ['message' => 'Пользователь не найден']);
         // }
