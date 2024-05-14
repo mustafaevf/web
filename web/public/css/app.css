@@ -238,7 +238,7 @@ button:hover {
 
 }
 input:-webkit-autofill {
-    background-color: #f0f0f0; 
+    background-color: transparent; 
 }
 .input {
     width: 100%;
@@ -368,7 +368,8 @@ input:-webkit-autofill {
 }
 .sort {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
 }
 .filters {
     margin-top: .9rem;

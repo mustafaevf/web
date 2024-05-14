@@ -2,7 +2,7 @@
 @section('main')
 
 
-<div class="secondary_text"><a href="{{route('admin.user.index')}}">Назад</a></div>
+<div class="secondary_text"><a href="{{route('index')}}">Назад</a></div>
 <div class="main_text big mt-1">Пользователь</div>
 
 <div class="main_text middle mt-1" style="display: flex; align-items: center; gap: 1rem;"><img src="{{asset('images/'.$user->avatar)}}" alt="" style="width: 60px; height: 60px; border-radius: 100%">{{$user->login}}</div>

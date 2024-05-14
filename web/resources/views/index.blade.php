@@ -100,6 +100,9 @@
     </div>
     <div class="products-right">
         <div class="sort">
+            <div class="sort_left">
+                <div class="box">Популярные</div>
+            </div>
             <div class="select" >
                 <div class="select-main flex" style="gap: .3rem;"><div class="main_text">Сортировать</div><img src="{{asset('images/expand_down.svg')}}" alt=""></div>
                 <div class="select-options" style="display: none">
