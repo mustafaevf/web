@@ -7,6 +7,7 @@ use App\Http\Controllers\Platform;
 use App\Http\Controllers\Auth;
 use App\Http\Controllers\User;
 use App\Http\Controllers\Payment;
+use App\Http\Controllers\Sell;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group( function () {
     Route::prefix('categories')->group(function () {
@@ -52,6 +53,7 @@ Route::prefix('auth')->group(function() {
     });
     Route::post('/login', Auth\Login\StoreController::class)->name('auth.login.store');
     Route::get('/logout', Auth\Logout\StoreController::class)->name('auth.logout.store');
+
     // Route::post('/register', Auth\Register\IndexController::class)->name('auth.register');
 });
 
@@ -63,6 +65,8 @@ Route::prefix('user')->middleware('auth')->group(function () {
 Route::middleware('auth')->group(function() {
     Route::get('/pay', Payment\Pay\IndexController::class)->name('payment.pay');
     Route::get('/withdraw', Payment\Withdraw\IndexController::class)->name('payment.withdraw');    
+    Route::get('/sell/{platform_title?}/{category_title?}', Sell\IndexController::class)->name('sell.index');
+    Route::post('/sell', Sell\StoreController::class)->name('sell.store');
 });
 
 

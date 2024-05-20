@@ -160,13 +160,15 @@ textarea {
     border: none;
     outline: none;
     background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
+    /* border: 1px solid var(--color-border); */
     border-radius: 1rem;
     color: var(--color-text-secondary);
     padding: .6rem;
     width: 100%;
     resize: none;
-    font-size: .9rem;
+    font-size: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: .9rem 1.1rem;
 }
 
 a.button {
@@ -197,7 +199,7 @@ button {
     background: var(--color-primary);
     cursor: pointer;
     width: 100%;
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: .3s;
 }
 button:hover {
@@ -370,6 +372,17 @@ input:-webkit-autofill {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.sort_left {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+}
+.sort_left .platform {
+    padding: .3rem 1rem;
+}
+.sort_left .box {
+    background: var(--color-bg-secondary);
 }
 .filters {
     margin-top: .9rem;

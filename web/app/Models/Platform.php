@@ -12,4 +12,8 @@ class Platform extends Model
         'title',
         'img'
     ];
+
+    public function category() {
+        return $this->hasMany('App\Models\Category');
+    }
 }
