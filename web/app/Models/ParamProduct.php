@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ParamProduct extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'param_id',
+        'product_id',
+        'value'
+    ];
 }

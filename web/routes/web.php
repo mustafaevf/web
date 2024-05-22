@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth;
 use App\Http\Controllers\User;
 use App\Http\Controllers\Payment;
 use App\Http\Controllers\Sell;
+use App\Http\Controllers\Product;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group( function () {
     Route::prefix('categories')->group(function () {
@@ -69,7 +70,9 @@ Route::middleware('auth')->group(function() {
     Route::post('/sell', Sell\StoreController::class)->name('sell.store');
 });
 
-
+Route::middleware('auth')->prefix('product')->group(function () {
+    Route::get('/{product}', Product\ShowController::class)->name('product.show');
+});
 
 // Route::group(function () {
 //     Route::get('/', IndexController::class);

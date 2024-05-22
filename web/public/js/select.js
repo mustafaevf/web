@@ -22,7 +22,6 @@ $('.select-option').click(function () {
         $(this).parent().parent().find('img').first().attr("src", "/images/expand_down.svg");
     }
 });
-
 $('.dropdown-main').click(function() {
     parent = $(this).parent().parent()
     if($(parent).find(".dropdown-options").css("display") == "none") {

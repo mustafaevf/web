@@ -356,7 +356,7 @@ input:-webkit-autofill {
     margin-top: 1.5rem;
     display: grid;
     grid-template-columns: 1fr 4fr;
-    gap: 1.445rem;
+    gap: 2rem;
 }
 .products-left {
     display: flex;

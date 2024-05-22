@@ -27,7 +27,7 @@
 <div class="main_text middle">Параметры</div>
 @if ($category->params->count() != 0)
     @foreach ($category->params as $param)
-        <div class="form_col">
+        <div class="form_col param_select">
             <div class="secondary_text">{{$param->title}} <img src="{{asset('images/trash.svg')}}" class="delete-params-submit" attr-param-id={{$param->id}} style="width: 20px; height: 20px; cursor: pointer;"></div>
             @if ($param->type == "choose_btn")
                 @php

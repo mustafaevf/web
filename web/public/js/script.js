@@ -236,6 +236,45 @@ $('#add-params-submit').click(function() {
   });
 });
 
+$('#add-product-submit').click(function () {
+  params = ""
+  $('.param_settings').each(function() {
+    if($(this).find(".choose_block").length > 0) {
+      params = params + $(this).attr('attr-id') + ":" + $(this).find(".choose_block").find('.active').html() + ";"
+    } else if($(this).find(".input") .length > 0) {
+      params = params + $(this).attr('attr-id') + ":" + $(this).find(".input").find('input').val() + ";"
+    }
+  });
+  console.log(params)
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const data = {
+    'title' : $('#product-title').val(),
+    'description' : $('#product-description').val(),
+    'price' : $('#product-price').val(),
+    'info' : $('#product-info').val(),
+    'category_id' : $('#product-category_id').val(),
+    'platform_id' : $('#product-platform_id').val(),
+    'params' : params
+  } 
+  console.log(data);
+  $.ajax({
+    url: '/sell', 
+    type: 'POST',
+    data: data,
+    success: function(response) {
+      CreateNotify(response);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+      alert('Ошибка при отправке данных на сервер!');
+    }
+  });
+});
+
 
 $('#add-category-submit').click(function() {
   $.ajaxSetup({

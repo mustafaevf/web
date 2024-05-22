@@ -124,49 +124,48 @@
         <div class="small-line">
 
         </div>
-        <div class="product-list">
-
+        <div class="products_">
+            @foreach($products as $product)
+                @php
+                    $pl = App\Models\Platform::where('id', $product->platform_id)->first();
+                    $ct = App\Models\Category::where('id', $product->category_id)->first();
+                    $seller = App\Models\User::where('id', $product->user_id)->first();
+                @endphp
+                <a href="/product/{{$product->id}}">
+                    <div class="product box box_type2 flex">
+                        <div class="product-left">  
+                            <div class="product-title">
+                                {{$product->title}}
+                            </div>
+                            <div class="product-seller flex">
+                                <img src="{{ asset('images/' . $product->user->avatar) }}" alt="" class="avatar">
+                                <div class="product-seller-login secondary_text">
+                                    {{$product->user->login}}                            
+                                </div>
+                                <div class="dot" style="background: var(--color-text-secondary);"></div>
+                                <div class="product-date secondary_text">
+                                    {{FormateDate($product->created_at)}}
+                                </div>
+                            </div>
+                            <div class="product-platform flex">
+                                <img src="{{ asset($product->platform->img) }}" alt=""> 
+                                <div class="secondary_text">{{$product->platform->title}}</div>
+                                <div class="secondary_text">/</div>
+                                <div class="secondary_text">{{$product->category->name}}</div>
+                            </div>
+                        </div>
+                        <div class="product-right">
+                            <div class="product-price">
+                                {{FormateMoney($product->price)}}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
         </div>
+        
     </div>
-    <div class="products_">
-        @foreach($products as $product)
-            @php
-                $pl = App\Models\Platform::where('id', $product->platform_id)->first();
-                $ct = App\Models\Category::where('id', $product->category_id)->first();
-                $seller = App\Models\User::where('id', $product->user_id)->first();
-            @endphp
-            <a href="/product/{{$product->id}}">
-                <div class="product box box_type2 flex">
-                    <div class="product-left">  
-                        <div class="product-title">
-                            {{$product->title}}
-                        </div>
-                        <div class="product-seller flex">
-                            <img src="{{ asset('images/' . $seller->avatar) }}" alt="" class="avatar">
-                            <div class="product-seller-login secondary_text">
-                                {{$seller->login}}                            
-                            </div>
-                            <div class="dot" style="background: var(--color-text-secondary);"></div>
-                            <div class="product-date secondary_text">
-                                {{FormateDate($product->created_at)}}
-                            </div>
-                        </div>
-                        <div class="product-platform flex">
-                            <img src="{{ asset('images/' . $pl->img) }}" alt=""> 
-                            <div class="secondary_text">{{$pl->title}}</div>
-                            <div class="secondary_text">/</div>
-                            <div class="secondary_text">{{$ct->name}}</div>
-                        </div>
-                    </div>
-                    <div class="product-right">
-                        <div class="product-price">
-                            {{FormateMoney($product->price)}}
-                        </div>
-                    </div>
-                </div>
-            </a>
-        @endforeach
-    </div>
+   
 </div>
 
 
