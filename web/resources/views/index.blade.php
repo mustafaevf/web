@@ -126,11 +126,6 @@
         </div>
         <div class="products_">
             @foreach($products as $product)
-                @php
-                    $pl = App\Models\Platform::where('id', $product->platform_id)->first();
-                    $ct = App\Models\Category::where('id', $product->category_id)->first();
-                    $seller = App\Models\User::where('id', $product->user_id)->first();
-                @endphp
                 <a href="/product/{{$product->id}}">
                     <div class="product box box_type2 flex">
                         <div class="product-left">  
