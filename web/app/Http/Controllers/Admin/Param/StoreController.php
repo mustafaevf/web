@@ -12,7 +12,7 @@ class StoreController extends Controller
 {
     public function __invoke(StoreRequest $request) {
         $data = $request->validated();
-        $platform_id = Category::find($data['category_id'])->first()->platform->id;
+        $platform_id = Category::find($data['category_id'])->platform->id;
         $param = [
             'title' => $data['title'],
             'attr' => $data['attr'],
